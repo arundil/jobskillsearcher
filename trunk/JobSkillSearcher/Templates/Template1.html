@@ -2,9 +2,43 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>JobSkillSearcher -Template 1-</title>
 </head>
-<body>
-
+<body id = jss-body>
+	<script type="text/javascript">
+	function show1 (){
+		alert("HolaMundo");		
+	}
+	</script>
+	
+	<div id = "header">
+		<h1>JobSkillSearcher</h1>
+		<h3>Faster way to find skills</h3>
+	</div>
+	<div id = searcher>
+		<label for= "s1">Search!</label>
+		<input type="text" name ="searcher" id="s1"	/>
+		<button type="submit">GO!</button>
+	</div>
+	<div id = search>
+		<h2>Programmer</h2>
+	</div>
+	<div id= options>
+		<ul>		
+			<li><h3>Main skills required</h3></li>
+			<div id>
+			<ul>
+				<li><input type="checkbox" name="chk1" id="chk1">
+				<input type="button" name="show1" value="Show" onclick="show1();"><br/>
+					Java(47.3 %)<br/>
+					C(28.8 %)<br/>
+					C++(12.8 %)<br/>
+					Python(5.9 %)<br/>
+					HTML(5.7 %)<br/>
+					JavaScript(3.4 %)<br/>
+			</ul>
+			</div>
+		</ul>
+	</div>
 </body>
 </html>
