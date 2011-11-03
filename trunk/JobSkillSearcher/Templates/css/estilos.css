@@ -1,0 +1,43 @@
+@CHARSET "UTF-8";
+
+/* div{
+	border-style: solid;
+} */
+
+body{
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+form {
+	border: solid;
+	margin-top: 20px;
+	padding: 0.5em;
+}
+
+#searcher{
+float: right;	
+}
+
+input.type = button {
+	float: right;
+}
+
+.graph {
+	margin-right: 50 px;
+	margin-top: -100px;
+	float: right;
+	position: relative;
+	background: transparent;
+}
+
+div#header{
+	border: solid;
+	padding: 0.5em;
+}
+div#footer{
+	margin-top: 20px;
+	border: solid;
+	padding: 0.5em;
+}
+	
+	
