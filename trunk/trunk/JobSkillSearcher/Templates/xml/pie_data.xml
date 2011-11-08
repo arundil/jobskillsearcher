@@ -1,0 +1,9 @@
+10101<?xml version="1.0" encoding="UTF-8"?>
+<pie>
+  <!-- <message bg_color="#CCBB00" text_color="#FFFFFF"><![CDATA[You can broadcast any message to chart from data XML file]]></message> -->
+  <slice title="Web" pull_out="true">14</slice>
+  <slice title="Html">10</slice>
+  <slice title="Javascript">8</slice>
+  <slice title="Css" url="http://www.google.com" description="Click on the slice to find more information" alpha="50">7</slice>
+  <slice title="Website">4</slice>
+</pie>
