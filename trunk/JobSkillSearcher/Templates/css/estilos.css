@@ -2,42 +2,52 @@
 
 /* div{
 	border-style: solid;
-} */
+}  */
 
 body{
-	font-family: Arial, Helvetica, sans-serif;
+	background-color: #E6E6E6;
+	text-align: center;
+	margin: 0px;
+	fon
 }
 
-form {
-	border: solid;
-	margin-top: 20px;
-	padding: 0.5em;
+#container{
+	background-color: #E6E6E6;
+	width: 1000px;
+	text-align: left;
+	margin: auto;
+}
+
+#logo{
+	float: left;
+	margin-left: 10px;
+	padding: 10px 0;
 }
 
 #searcher{
-float: right;	
+	padding-top: 10px;
+}
+.nofloat{
+	clear: both;
 }
 
-input.type = button {
+#content{
+	background-color:white;
+	border: solid;
+	padding: 
+}
+
+#header{
+	background-color:white;
+	margin-bottom :2em;
+	margin-top: 2em;
+	border: solid;
+}
+
+#footer{
+	background-color: white;
+}
+
+#menu{
 	float: right;
 }
-
-.graph {
-	margin-right: 50 px;
-	margin-top: -100px;
-	float: right;
-	position: relative;
-	background: transparent;
-}
-
-div#header{
-	border: solid;
-	padding: 0.5em;
-}
-div#footer{
-	margin-top: 20px;
-	border: solid;
-	padding: 0.5em;
-}
-	
-	
