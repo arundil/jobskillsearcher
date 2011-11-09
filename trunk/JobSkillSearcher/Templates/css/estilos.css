@@ -1,14 +1,14 @@
 @CHARSET "UTF-8";
 
-/* div{
+/*  div{
 	border-style: solid;
-}  */
+}   */
 
 body{
 	background-color: #E6E6E6;
 	text-align: center;
 	margin: 0px;
-	fon
+	font-family:arial,helvetica,sans-serif;
 }
 
 #container{
@@ -25,7 +25,9 @@ body{
 }
 
 #searcher{
-	padding-top: 10px;
+	padding: 10px;
+	float: right;
+	
 }
 .nofloat{
 	clear: both;
@@ -34,7 +36,7 @@ body{
 #content{
 	background-color:white;
 	border: solid;
-	padding: 
+	padding: 10px;
 }
 
 #header{
@@ -46,8 +48,51 @@ body{
 
 #footer{
 	background-color: white;
+	margin-top: 2em;
+	margin-bottom: 2em;
+	border: solid;
+	padding: 10px;
 }
 
 #menu{
+	float: left;
+	width: 300px;
+	
+}
+
+#main_content{
+	margin-left: 318px;
+	
+}
+
+.title{
+	background-color: black;
+	color: #fff;
+	padding: 5px;
+	text-align: center;
+	font-family: Verdana;
+	font-weight: bold;
+	
+}
+.body_menu{
+	background-color: #ccc;
+	color: #333;
+	padding: 5px;
+	margin-bottom: 15px;
+	font-size:smaller;
+}
+
+ul.ulnav li{
+	list-style: none;
+}
+
+.float{
 	float: right;
+	padding: 4px;
+	font-size: 105%;
+	font-weight: bold;
+}
+
+.button{
+	float: ri;
 }
