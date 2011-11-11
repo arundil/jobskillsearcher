@@ -1,5 +1,5 @@
 from django.conf.urls.defaults import *
-from jobskillsearcher.views import current_datetime
+from jobskillsearcher.views import current_datetime,hours_ahead
 
 
 # Uncomment the next two lines to enable the admin:
@@ -8,6 +8,7 @@ from jobskillsearcher.views import current_datetime
 
 urlpatterns = patterns('',
     (r'^time/$', current_datetime),
+    (r'^time/plus/(\d{1,2})+/$', hours_ahead),
 
     # Examples:
     # url(r'^$', 'jobskillsearcher.views.home', name='home'),
