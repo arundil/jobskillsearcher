@@ -1,10 +1,14 @@
-from django.conf.urls.defaults import patterns, include, url
+from django.conf.urls.defaults import *
+from jobskillsearcher.views import current_datetime
+
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
 
 urlpatterns = patterns('',
+    (r'^time/$', current_datetime),
+
     # Examples:
     # url(r'^$', 'jobskillsearcher.views.home', name='home'),
     # url(r'^jobskillsearcher/', include('jobskillsearcher.foo.urls')),
