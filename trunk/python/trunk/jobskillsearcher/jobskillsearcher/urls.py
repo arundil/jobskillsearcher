@@ -1,5 +1,5 @@
 from django.conf.urls.defaults import *
-from jobskillsearcher.views import current_datetime,hours_ahead
+from jobskillsearcher.jssapp.views import current_datetime,hours_ahead
 
 
 # Uncomment the next two lines to enable the admin:
