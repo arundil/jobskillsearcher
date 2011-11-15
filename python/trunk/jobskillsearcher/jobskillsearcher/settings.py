@@ -1,5 +1,6 @@
 # Django settings for jobskillsearcher project.
-import os.path
+import os
+import django
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -13,7 +14,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'mysql',  # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'jssdatabase',                      # Or path to database file if using sqlite3.
+        'NAME': 'prueba',                      # Or path to database file if using sqlite3.
         'USER': 'root',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '127.0.0.1',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -90,7 +91,7 @@ SECRET_KEY = '9rd(+5v24nmmy8i&%hlqkv)_+8)c2h4j95$jxcgzy!8f(w3kq8'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+     'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -117,10 +118,11 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'jobskillsearcher.jssapp',
     # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
+    'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
+     #'django.contrib.admindocs',
 )
 
 # A sample logging configuration. The only tangible logging
