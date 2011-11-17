@@ -1,7 +1,11 @@
 {% extends "Base.html" %}
 
 {% block title %} La hora actual {%endblock %}
-{% block content%}
 
+{% block content%}
+<p>{{mensaje}}</p>
 <p>It is now {{ current_date }}.</p>
+	{% for consulta in consultas %}
+		<p>{{consulta.word}}<p>
+	{% endfor %}
 {% endblock %}
