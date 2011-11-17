@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import *
 from django.contrib import admin
-from jobskillsearcher.jssapp.views import current_datetime,hours_ahead
+from jobskillsearcher.jssapp.views import *
 
 
 # Uncomment the next two lines to enable the admin:
@@ -11,6 +11,8 @@ urlpatterns = patterns('',
     (r'^time/$', current_datetime),
     (r'^time/plus/(\d{1,2})+/$', hours_ahead),
     (r'^admin/', include(admin.site.urls)),
+    (r'^hola/$',hola),
+    (r'^search/$',search),
     
     # Examples:
     # url(r'^$', 'jobskillsearcher.views.home', name='home'),
