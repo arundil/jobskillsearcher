@@ -22,12 +22,13 @@ def hours_ahead(request, offset):
     return HttpResponse(html)
 
 def search(request):
-    search =request.POST['q']
+    search="Introduce algo"
     
     if search :
+        search =request.POST['q']
         results = "algo hay"
-        query= (Q(word__icontains=search))
-        results = baseword.objects.filter(query).distinct()
+        query= (Q(name__icontains=search))
+        results = HjhTermGroup.objects.filter(query).distinct()
     else :
         results ="Debes introducir algo en el buscador";
     
