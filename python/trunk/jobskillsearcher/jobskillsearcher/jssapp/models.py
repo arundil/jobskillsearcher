@@ -1,139 +1,116 @@
+# This is an auto-generated Django model module.
+# You'll have to do the following manually to clean this up:
+#     * Rearrange models' order
+#     * Make sure each model has one field with primary_key=True
+# Feel free to rename the models, but don't rename db_table values or field names.
+#
+# Also note: You'll have to insert the output of 'django-admin.py sqlcustom [appname]'
+# into your database.
+
 from django.db import models
-from django.contrib.auth.models import User
 
-
-# Create your models here.
-class baseword(models.Model):
+class Baseword(models.Model):
+    id = models.IntegerField(primary_key=True)
     word = models.TextField()
     type = models.TextField()
-    
     class Meta:
-        db_table = 'baseword'
-    
-    def __unicode__(self):
-        return self.word 
-    
-class eval_analysis(models.Model):
-    announcementID = models.CharField(max_length=11)
-    evaluator = models.CharField(max_length=8)
-    type = models.CharField(max_length=8)
-    term = models.CharField(max_length=64)
-    
-    class Meta:
-        db_table = 'eval_analysis'
-        
-    def __unicode__(self):
-        return self.announcementID  
- 
-class group(models.Model):
-    parentid = models.IntegerField(max_length=11)
-    name = models.CharField(max_length=40)
-    type = models.IntegerField(max_length=11)
-    
-    class Meta:
-        db_table = 'group'
-    
-    def __unicode__(self):
-        return self.parentid
-    
+        db_table = u'baseword'
 
-class hjh_term_group (models.Model):
-    parent_id = models.IntegerField (max_length=11)
-    name = models.CharField (max_length=128)
+class EvalAnalysis(models.Model):
+    id = models.IntegerField(primary_key=True)
+    announcementid = models.IntegerField(null=True, db_column='announcementID', blank=True) # Field name made lowercase.
+    evaluator = models.CharField(max_length=24, blank=True)
+    type = models.CharField(max_length=24, blank=True)
+    term = models.CharField(max_length=192, blank=True)
     class Meta:
-        db_table = 'hjh_term_group'
-    
-    def __unicode__(self):
-        return self.name
+        db_table = u'eval_analysis'
 
-class hjh_terms(models.Model):
-    name = models.IntegerField (max_length=11)
-    group_id = models.ForeignKey(hjh_term_group)
-    language = models.IntegerField (max_length=11)
-    
+class Group(models.Model):
+    id = models.IntegerField(primary_key=True)
+    parentid = models.IntegerField(null=True, blank=True)
+    name = models.CharField(max_length=120)
+    type = models.IntegerField()
     class Meta:
-        db_table = 'hjh_terms'
-    
-    def __unicode__(self):
-        return self.name
+        db_table = u'group'
 
-
-class source (models.Model):
-    name = models.CharField(max_length=50)
+class HjhTermGroup(models.Model):
+    id = models.IntegerField(primary_key=True)
+    parent_id = models.IntegerField(null=True, blank=True)
+    name = models.CharField(max_length=384, blank=True)
     class Meta:
-        db_table = 'source'
-    def __unicode__(self):
-        return self.name
+        db_table = u'hjh_term_group'
 
-class jannouncement (models.Model):
-    title = models.CharField (max_length=50)
-    url = models.URLField (max_length=200)
+class HjhTerms(models.Model):
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=384, blank=True)
+    group_id = models.IntegerField(null=True, blank=True)
+    language = models.IntegerField(null=True, blank=True)
+    class Meta:
+        db_table = u'hjh_terms'
+
+class Jannouncement(models.Model):
+    id = models.IntegerField(primary_key=True)
+    title = models.CharField(max_length=150)
+    url = models.CharField(max_length=600)
     date = models.DateField()
-    status = models.IntegerField (max_length=11)
-    sourceid = models.ForeignKey(source)
+    status = models.IntegerField()
+    sourceid = models.IntegerField()
     class Meta:
-        db_table = 'jannouncement'
-    def __unicode__(self):
-        return self.title
+        db_table = u'jannouncement'
 
-class morphword (models.Model):
-    word = models.CharField (max_length=40)
-    bid = models.ForeignKey(baseword)
+class Morphword(models.Model):
+    id = models.IntegerField(primary_key=True)
+    word = models.CharField(max_length=120)
+    bid = models.IntegerField()
     class Meta:
-        db_table = 'morphword'
-    def __unicode__(self):
-        return self.word
+        db_table = u'morphword'
 
-class old_words (models.Model):
-    groupID = models.ForeignKey(group)
-    type = models.IntegerField (max_length=11)
-    word = models.CharField (max_length=40)
+class OldWords(models.Model):
+    id = models.IntegerField(primary_key=True)
+    groupid = models.IntegerField(null=True, db_column='groupID', blank=True) # Field name made lowercase.
+    type = models.IntegerField(null=True, blank=True)
+    word = models.CharField(max_length=120, blank=True)
     class Meta:
-        db_table = 'old_words'
-    def __unicode__(self):
-        return self.word
-    
-class searchlog (models.Model):
-    term = models.CharField (max_length=64)
-    announcements = models.IntegerField(max_length=11)
-    word = models.IntegerField (max_length=11)
-    execution_time = models.CharField (max_length=16)
-    executed = models.CharField(max_length=20)
-    ip_address = models.IPAddressField()
-    class Meta:
-        db_table = 'searchlog'
-    def __unicode__(self):
-        return self.word
-    
-    
-class words (models.Model):
-    gid = models.ForeignKey(group)
-    bid = models.ForeignKey(baseword)
-    word = models.CharField(max_length=128)
-    type = models.ForeignKey(hjh_term_group)
-    count = models.IntegerField(max_length=11)
-    class Meta:
-        db_table = 'words'
-    def __unicode__(self):
-        return self.word 
-    
-class synonymes (models.Model):
-    word_group_ID = models.IntegerField(max_length=11)
-    word_ID = models.ForeignKey(words)
-    baseword = models.ForeignKey(baseword)
-    class Meta:
-        db_table = 'synonymes'
-    def __unicode__(self):
-        return self.word_group_ID
+        db_table = u'old_words'
 
-class wlist (models.Model):
-    jid = models.ForeignKey(jannouncement)
-    wid = models.ForeignKey(words)
+class Searchlog(models.Model):
+    term = models.CharField(max_length=192, blank=True)
+    announcements = models.IntegerField(null=True, blank=True)
+    words = models.IntegerField(null=True, blank=True)
+    execution_time = models.CharField(max_length=48, blank=True)
+    executed = models.DateTimeField()
+    ip_address = models.CharField(max_length=96, blank=True)
     class Meta:
-        db_table = 'wlist'
-    def __unicode__(self):
-        return self.jid
+        db_table = u'searchlog'
 
-    
-    
-    
+class Source(models.Model):
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=150)
+    class Meta:
+        db_table = u'source'
+
+class Synonymes(models.Model):
+    id = models.IntegerField(primary_key=True)
+    word_group_id = models.IntegerField(null=True, db_column='word_group_ID', blank=True) # Field name made lowercase.
+    word_id = models.IntegerField(null=True, db_column='word_ID', blank=True) # Field name made lowercase.
+    baseword = models.IntegerField(null=True, blank=True)
+    class Meta:
+        db_table = u'synonymes'
+
+class Wlist(models.Model):
+    id = models.IntegerField(primary_key=True)
+    jid = models.IntegerField()
+    wid = models.IntegerField()
+    class Meta:
+        db_table = u'wlist'
+
+class Words(models.Model):
+    id = models.IntegerField(primary_key=True)
+    gid = models.IntegerField()
+    bid = models.IntegerField()
+    word = models.CharField(max_length=384, blank=True)
+    type = models.IntegerField()
+    count = models.IntegerField()
+    class Meta:
+        db_table = u'words'
+
