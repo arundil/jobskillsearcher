@@ -5,6 +5,7 @@ import datetime
 from jobskillsearcher.jssapp.models import *
 from django.shortcuts import render_to_response
 from django.db.models import Q
+from django.core.context_processors import request
 
 def hola(request):
     return HttpResponse("Hola Mundo")
@@ -32,4 +33,9 @@ def search(request):
     else :
         results ="Debes introducir algo en el buscador";
     
-    return render_to_response('main.html',{'search':search, 'results':results})                                       
+    return render_to_response('search.html',{'search':search, 'results':results})  
+
+
+def nada (request):
+    t=get_template('search.html')
+    return HttpResponse(t)                                     
