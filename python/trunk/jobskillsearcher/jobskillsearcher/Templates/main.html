@@ -1,14 +1,28 @@
-{% extends "Base.html" %}
+{% extends "Base.html" %} 
+{% block title %} JobSkillSearcher {% endblock %} 
 
-{% block title %} Search! {% endblock %}
+{% block header %} {% endblock %} 
 
 {% block content%}
-<form action="." method = "post">
-	<label for = "consulta">Introduca la Busqueda para la base de datos</label>
-	<input type="text" name= 'q' id= "consulta"/>
-	<input type="submit" value="Amonos que nos vamos"/>
-</form>
-{{search}}
-<br/>
-{{results}}
+<div id=maincontent>
+	<h1>JobSkillSearcher</h1>
+	<h3>Easy way to find skills you need for your future job</h3>
+	<form action="/search/" method="post">
+		<div id="mainsearch">
+			<label for="consulta" style="font-size: 20px">Search!</label> <input
+				type="text" name='q' id="consulta"
+				style="width: 500px; height: 30px; font-size: 20px" /> <input
+				type="submit" value="Go!" style="height: 35px" />
+		</div>
+	</form>
+</div>
+<br />
+{% endblock %} 
+
+{% block footer %}
+<div id="footer">
+	<div id=options>
+		<a href="">Contact us</a> <a href="">Help</a>
+	</div>
+</div>
 {% endblock %}
