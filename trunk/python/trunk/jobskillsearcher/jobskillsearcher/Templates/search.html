@@ -2,8 +2,67 @@
 
 {% block content %}
 <div id= content>
-	{{search}}</br>
-	{{results}}
+	<div id=search>
+		<h2>{{search}}</h2>
+	</div>
+{% block menu %}
+	<div id=menu>
+		<div class="title">Knowledge</div>
+		<div id="list2" class="body_menu">
+			<ul class="ulnav">
+				<li>
+					<div class="float">Educational Requirements</div>
+					<div id=show2-1>
+						<input type="image" name="show2-1"
+							src="/site_media/triangulo lado.gif"
+							width="25" height="25"
+							onclick="show('sublist2-1','remove2-1','show2-1');" id="bt1">
+					</div>
+					<div id=remove2-1 style="display: none;">
+						<input type="image" name="remove2-1"
+							src=/site_media/triangulo abajo.gif"
+							width="25" height="25"
+							onclick="remove('sublist2-1','show2-1','remove2-1');" id="bt1">
+						<br />
+					</div>
+				</li>
+				<div id="sublist2-1">
+					<a href="#">C++(14)</a><br /> <a href="#">Java(14)</a><br /> <a
+						href="#">Microsoft(10)</a><br /> <a href="#">Ibm(1)</a><br />
+					<a href="#">M.sc(1)</a><br />
+				</div>
+				<li>
+					<div class="float">Language Skills</div>
+					<div class="button"></div>
+					<div id=show2-2>
+						<input type="image" name="show2-2"
+							src="/site_media/triangulo lado.gif"
+							width="25" height="25"
+							onclick="show('sublist2-2','remove2-2','show2-2');" id="bt2">
+					</div>
+					<div id=remove2-2 style="display: none;">
+						<input type="image" name="remove2-2"
+							src="/site_media/triangulo abajo.gif"
+							width="25" height="25"
+							onclick="remove('sublist2-2','show2-2','remove2-2');" id="bt2">
+						<br />
+					</div>
+				</li>
+				<div id="sublist2-2">
+					<a href="#">English(23)</a><br /> <a href="#">Written(20)</a><br />
+					<a href="#">Finnish(6)</a><br /> <a href="#">Oral(5)</a><br />
+					<a href="#">Suomi(1)</a><br />
+				</div>
+			</ul>
+		</div>
+	</div>
+	{% endblock %}
+	<div id = main_content>
+	<h2>N Resultados:{{cont}}</h2>
+	{{jaun}}</br>
+	{{results}}</br>
+	<strong>{{test}}</strong>
+	</div>
 </div>
 
 {% endblock %}

@@ -15,6 +15,9 @@ class Baseword(models.Model):
     type = models.TextField()
     class Meta:
         db_table = u'baseword'
+        
+    def __unicode__(self):
+        return self.word
 
 class EvalAnalysis(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -24,6 +27,9 @@ class EvalAnalysis(models.Model):
     term = models.CharField(max_length=192, blank=True)
     class Meta:
         db_table = u'eval_analysis'
+        
+    def __unicode__(self):
+        return self.term
 
 class Group(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -32,6 +38,9 @@ class Group(models.Model):
     type = models.IntegerField()
     class Meta:
         db_table = u'group'
+    
+    def __unicode__(self):
+        return self.name
 
 class HjhTermGroup(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -47,6 +56,9 @@ class HjhTerms(models.Model):
     language = models.IntegerField(null=True, blank=True)
     class Meta:
         db_table = u'hjh_terms'
+        
+    def __unicode__(self):
+        return self.name
 
 class Jannouncement(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -57,6 +69,9 @@ class Jannouncement(models.Model):
     sourceid = models.IntegerField()
     class Meta:
         db_table = u'jannouncement'
+        
+    def __unicode__(self):
+        return self.title
 
 class Morphword(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -64,6 +79,9 @@ class Morphword(models.Model):
     bid = models.IntegerField()
     class Meta:
         db_table = u'morphword'
+    
+    def __unicode__(self):
+        return self.word
 
 class OldWords(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -72,6 +90,8 @@ class OldWords(models.Model):
     word = models.CharField(max_length=120, blank=True)
     class Meta:
         db_table = u'old_words'
+    def __unicode__(self):
+        return self.word
 
 class Searchlog(models.Model):
     term = models.CharField(max_length=192, blank=True)
@@ -82,12 +102,18 @@ class Searchlog(models.Model):
     ip_address = models.CharField(max_length=96, blank=True)
     class Meta:
         db_table = u'searchlog'
+    
+    def __unicode__(self):
+        return self.words
 
 class Source(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=150)
     class Meta:
         db_table = u'source'
+        
+    def __unicode__(self):
+        return self.name
 
 class Synonymes(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -97,12 +123,18 @@ class Synonymes(models.Model):
     class Meta:
         db_table = u'synonymes'
 
+    def __unicode__(self):
+        return self.baseword
+    
 class Wlist(models.Model):
     id = models.IntegerField(primary_key=True)
     jid = models.IntegerField()
     wid = models.IntegerField()
     class Meta:
         db_table = u'wlist'
+    
+    def __str__(self):
+        return '%s'%(self.jid)
 
 class Words(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -113,4 +145,6 @@ class Words(models.Model):
     count = models.IntegerField()
     class Meta:
         db_table = u'words'
-
+    
+    def __unicode__(self):
+        return self.word
