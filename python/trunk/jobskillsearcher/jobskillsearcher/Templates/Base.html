@@ -14,8 +14,8 @@
 				<h3>Easy way to find skills you need for your future job</h3>
 			</div>
 			<div id=searcher>
-				<form action="#" method="POST">
-					<label for="s1">Search!</label> <input type="text" name="searcher"
+				<form action="/search/" method="POST">
+					<label for="s1">Search!</label> <input type="text" name="q" id ="q"
 						id="s1" />
 					<button type="submit">GO!</button>
 				</form>
@@ -23,12 +23,12 @@
 			<div class="nofloat"></div>
 		</div>
 		{% endblock %} 
+	
+		{% block content%} 
 		{% block menu %}
 	
 		{% endblock %}
-		
-		
-		{% block content%} aqui va el content{% endblock%}
+		{% endblock%}
 		{% block footer %} 
 		<div id="footer">
 			<div id=options>

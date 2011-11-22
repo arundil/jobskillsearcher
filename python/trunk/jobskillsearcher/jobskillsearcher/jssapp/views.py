@@ -6,6 +6,7 @@ from jobskillsearcher.jssapp.models import *
 from django.shortcuts import render_to_response
 from django.db.models import Q
 from django.core.context_processors import request
+from django.db.models import Count,Avg
 
 def hola(request):
     return HttpResponse("Hola Mundo")
@@ -27,13 +28,25 @@ def search(request):
     
     if search :
         search =request.POST['q']
-        results = "algo hay"
-        query= (Q(name__icontains=search))
-        results = HjhTermGroup.objects.filter(query).distinct()
+        #palabra a buscar, Esta en la lista?
+        query= (Q(word = search))
+        results = Words.objects.filter(query)
+        
+        #Si esta en la lista, sacamos el anuncio donde esta contenido esta palabra.
+        query2 = (Q(wid = Words.objects.filter(word=search)))
+        jaun = list(Wlist.objects.filter(query2))
+        
+        #Busco en los anuncios a ver con que palabra se relaciona esta oferta.
+        
+        cont = Wlist.objects.filter(query2).count()
+        
+        test=Words.objects.annotate(Count('word'))       
+        
+        
     else :
         results ="Debes introducir algo en el buscador";
     
-    return render_to_response('search.html',{'search':search, 'results':results})  
+    return render_to_response('search.html',{'search':search, 'results':results, 'cont':cont, 'jaun':jaun, 'test': test})  
 
 
 def nada (request):
