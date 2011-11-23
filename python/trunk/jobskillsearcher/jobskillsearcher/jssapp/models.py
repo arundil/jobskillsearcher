@@ -134,7 +134,7 @@ class Wlist(models.Model):
         db_table = u'wlist'
     
     def __str__(self):
-        return '%s'%(self.jid)
+        return '%s|%s'%(self.wid,self.jid)
 
 class Words(models.Model):
     id = models.IntegerField(primary_key=True)
