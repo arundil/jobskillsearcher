@@ -58,11 +58,16 @@
 	</div>
 	{% endblock %}
 	<div id = main_content>
-	<h2>N Resultados:{{cont}}</h2>
-	{{jaun}}</br>
-	{{results}}</br>
 	<h2>TEST</h2>
-	 <strong>{{test}}</strong>
+	{% for word in test %}
+	  {{word.word}}
+	</br>
+	{% endfor %}	
+	<h2>N Resultados:{{cont}}</h2>
+	{% for i in jaun %}
+		{{i.jid}}</br>
+	{% endfor %}
+	
 	</div>
 </div>
 
