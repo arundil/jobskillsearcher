@@ -146,5 +146,5 @@ class Words(models.Model):
     class Meta:
         db_table = u'words'
     
-    def __unicode__(self):
-        return self.word
+    def __str__(self):
+        return '%s'%(self.word)
