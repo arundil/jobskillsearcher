@@ -1,10 +1,10 @@
 @CHARSET "UTF-8";
 
 @CHARSET "UTF-8";
-/* 
-  div{
+ 
+/*   div{
 	border-style: solid;
-}    */
+}  */   
 
 body{
 	background-color: #E6E6E6;
@@ -12,6 +12,10 @@ body{
 	margin: 0px;
 	padding-top :20px;
 	font-family:arial,helvetica,sans-serif;
+}
+#error {
+	color: red;
+	float: right;
 }
 
 #container{
