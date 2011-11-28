@@ -9,7 +9,6 @@
 <link rel="stylesheet" type="text/css" href="media/css/estilos.css">
 
 
-
 </script>
 </head>
 <body>
@@ -21,16 +20,41 @@
 			</div>
 			<div id=searcher>
 				<form action="#" method="POST">
-					<label for="s1">Search!</label> <input type="text" name="searcher"
+					<label for="s1">Search!</label> <input type="text" name="q"
 						id="s1" />
 					<button type="submit">GO!</button>
 				</form>
 			</div>
+			<div id="error">					
+					<?
+					$error = "";
+					$flagerror = false;
+					$search = $_POST['q'];
+					
+					$conexion = mysql_connect("localhost", "root", "");
+    				mysql_select_db("JSSbd2", $conexion); 
+    				
+					$consulta = "SELECT * FROM words WHERE (word = '$search')";
+					
+					$resconsulta = mysql_query($consulta,$conexion) or die(mysql_error());
+    				$col = mysql_num_rows($resconsulta);
+    		
+    				if (!$col>0){
+    					if ($search == "")
+    				 		$error ='Please, write a word in the text-box and them click GO!   ';
+    					else
+    				 		$error = 'The word does not exist or is not registered even in the database';
+    					$flagerror = true;
+    				}
+					echo $error;	 
+					?>
+			 </div>
 			<div class="nofloat"></div>
 		</div>
 		<div id=content>
 			<div id=search>
-				<h2>Programmer:</h2>
+
+				<h2><?php echo htmlspecialchars($_POST['q']); ?>:</h2>
 			</div>
 			<div id=menu>
 
@@ -58,34 +82,55 @@
 			<div id=main_content>
 				MAIN CONTENT</br>
 			<? 
-			$conexion = mysql_connect("localhost", "root", "");
-    		mysql_select_db("JSSbd2", $conexion); 
     		
+    		$row = mysql_fetch_assoc($resconsulta);
+			$wordid = $row['id'];
+   			
+   			echo "<h2> Palabra buscada: ".$row['word']."</h2>";
+						
+    		if (!$flagerror && $col>0){
+			$querydim = "SELECT * FROM wlist WHERE wid=$wordid; ";
+			$cadena="";
+			
+    		$resquerydim= mysql_query($querydim, $conexion) or die(mysql_error());
+    		$rowquerydim = mysql_num_rows($resquerydim);
     		
-    		$queEmp = "SELECT word, type, count(word) as lkm FROM wlist LEFT JOIN words ON wlist.wid=words.id 
-    		WHERE (1=0 OR jid=646 OR jid=711 OR jid=712 OR jid=745 OR jid=762 OR jid=763 OR jid=1007 
-   			OR jid=1008 OR jid=1135 OR jid=1559 OR jid=1879 OR jid=2884 OR jid=2887 OR jid=2952 OR 
-    		jid=2955 OR jid=3138 OR jid=3139 OR jid=3143 OR jid=3151 OR jid=3161 OR jid=3162 OR jid=3892 OR 
-    		jid=4944 OR jid=4946 OR jid=4972 OR jid=5204 OR jid=5217 OR jid=5218 OR jid=5222 OR jid=5440 OR
-     		jid=5679 OR jid=5706 OR jid=5707 OR jid=5709 OR jid=5776 OR jid=5900 OR jid=6396 OR jid=6408 OR 
-     		jid=6412 OR jid=6478 OR jid=6582 OR jid=6617 OR jid=6768 OR jid=6813 OR jid=6815 OR jid=6974 OR 
-     		jid=7283 OR jid=7802 ) AND type!=3 AND type!=0 AND type!=701 GROUP BY word ORDER BY lkm DESC, word;";
-    		
-    		$resEmp = mysql_query($queEmp, $conexion) or die(mysql_error());
-    		$totEmp = mysql_num_rows($resEmp);
-    		
-    		if ($totEmp> 0) {
-       			while ($rowEmp = mysql_fetch_assoc($resEmp)) {
-          			echo "<strong> Word:".$rowEmp['word']."</strong>";
-          			echo "(: ".$rowEmp['lkm'].")";
-          			echo "Type: ".$rowEmp['type']."<br>";
-       			}
+    		while ($row2 = mysql_fetch_assoc($resquerydim)){
+    			$jid = $row2['jid'];
+    			if ($cadena == "")
+    				$cadena=$cadena . "jid=$jid";
+    			else
+    				$cadena=$cadena ." OR jid=$jid" ;
     		}
+    		
+    		  		
+    		$queEmp = "SELECT word, type, count(word) as lkm FROM wlist LEFT JOIN words ON wlist.wid=words.id 
+    		WHERE ($cadena) AND type!=3 AND type!=0 AND type!=701 GROUP BY word ORDER BY lkm DESC, word;";
+    		
+    		
+    		//echo "$queEmp";  
+        		
+    			
+    			
+    			$resEmp = mysql_query($queEmp, $conexion) or die(mysql_error());
+    			$totEmp = mysql_num_rows($resEmp);
+    			
+    			
+    			
+    			if ($totEmp> 0) {
+       				while ($rowEmp = mysql_fetch_assoc($resEmp)) {
+          				echo "<strong> Word:".$rowEmp['word']."</strong>";
+          				echo "( ".$rowEmp['lkm'].")";
+          				echo "Type: ".$rowEmp['type']."<br>";
+       				}
+    			}
+    		}
+    		
     		
     		?>
 			</div>
 		</div>
-		<div id="footer">
+			<div id="footer">
 			<div id=options>
 				<a href="">Contact us</a> <a href="">Help</a>
 			</div>
