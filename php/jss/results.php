@@ -7,10 +7,8 @@
 <script language="JavaScript" src="media/javascript/jstemplate1.js"
 	type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="media/css/estilos.css">
-
-
-</script>
 </head>
+
 <body>
 	<div id=container>
 		<div id="header">
@@ -46,12 +44,61 @@
     				 		$error = 'The word does not exist or is not registered even in the database';
     					$flagerror = true;
     				}
+    				//muestra el error en la página web
 					echo $error;	 
-					?>
+    				
+    				
+    				
+    				$row = mysql_fetch_assoc($resconsulta);
+					$wordid = $row['id'];
+					
+					if (!$flagerror && $col>0){
+					$querydim = "SELECT * FROM wlist WHERE wid=$wordid; ";
+					$cadena="";
+			
+    				$resquerydim= mysql_query($querydim, $conexion) or die(mysql_error());
+    				$rowquerydim = mysql_num_rows($resquerydim);
+    		
+    				while ($row2 = mysql_fetch_assoc($resquerydim)){
+    					$jid = $row2['jid'];
+    					if ($cadena == "")
+    						$cadena=$cadena . "jid=$jid";
+    					else
+    						$cadena=$cadena ." OR jid=$jid" ;
+    					}
+    		
+    		  		
+    				$queEmp = "SELECT word, type, count(word) as lkm FROM wlist LEFT JOIN words ON wlist.wid=words.id 
+    				WHERE ($cadena) AND type!=3 AND type!=0 AND type!=701 GROUP BY word ORDER BY lkm DESC, word;";
+    		
+    		
+   	 				//echo "$queEmp";  
+        		
+    			
+    			
+    				$resEmp = mysql_query($queEmp, $conexion) or die(mysql_error());
+    				$totEmp = mysql_num_rows($resEmp);
+    			
+    			}
+    		 
+					
+			?>
 			 </div>
 			<div class="nofloat"></div>
 		</div>
 		<div id=content>
+			<div id="datahidden" style="display:none">
+    		<?
+    		    if ($totEmp> 0) {
+       				while ($rowEmp = mysql_fetch_assoc($resEmp)) {
+       					echo "<div id=".$rowEmp['type']."><p>";
+          				echo "<strong>".$rowEmp['word']."</strong>";
+          				echo "(".$rowEmp['lkm']." results)";
+          				echo "</div><p>";
+       				}
+    			}
+    		?>
+    		</div>
 			<div id=search>
 
 				<h2><?php echo htmlspecialchars($_POST['q']); ?>:</h2>
@@ -60,21 +107,36 @@
 
 				<div class="title">Main skills required</div>
 				<div id="list1" class="body_menu">
-					
+					<script type="text/javascript">
+			
+						hazlista();
+				
+					</script>
 				</div>
 
 				<div class="title">Knowledge</div>
 				<div id="list2" class="body_menu">
-					
+					<script type="text/javascript">
+			
+						//hazlista(2);
+				
+					</script>
 				</div>
 				<div class="title">Personal Skills</div>
 				<div id=" list3" class="body_menu">
-					
+					<script type="text/javascript">
+			
+						//hazlista(3);
+				
+					</script>
 				</div>
 				<div class="title">Other Information</div>
-
 				<div id="list4" class="body_menu">
-					
+					<script type="text/javascript">
+			
+						//hazlista(4);
+				
+					</script>
 				</div>
 			</div>
 
@@ -83,51 +145,12 @@
 				MAIN CONTENT</br>
 			<? 
     		
-    		$row = mysql_fetch_assoc($resconsulta);
-			$wordid = $row['id'];
+    		
    			
    			echo "<h2> Palabra buscada: ".$row['word']."</h2>";
 						
-    		if (!$flagerror && $col>0){
-			$querydim = "SELECT * FROM wlist WHERE wid=$wordid; ";
-			$cadena="";
-			
-    		$resquerydim= mysql_query($querydim, $conexion) or die(mysql_error());
-    		$rowquerydim = mysql_num_rows($resquerydim);
-    		
-    		while ($row2 = mysql_fetch_assoc($resquerydim)){
-    			$jid = $row2['jid'];
-    			if ($cadena == "")
-    				$cadena=$cadena . "jid=$jid";
-    			else
-    				$cadena=$cadena ." OR jid=$jid" ;
-    		}
-    		
-    		  		
-    		$queEmp = "SELECT word, type, count(word) as lkm FROM wlist LEFT JOIN words ON wlist.wid=words.id 
-    		WHERE ($cadena) AND type!=3 AND type!=0 AND type!=701 GROUP BY word ORDER BY lkm DESC, word;";
-    		
-    		
-    		//echo "$queEmp";  
-        		
-    			
-    			
-    			$resEmp = mysql_query($queEmp, $conexion) or die(mysql_error());
-    			$totEmp = mysql_num_rows($resEmp);
-    			
-    			
-    			
-    			if ($totEmp> 0) {
-       				while ($rowEmp = mysql_fetch_assoc($resEmp)) {
-          				echo "<strong> Word:".$rowEmp['word']."</strong>";
-          				echo "( ".$rowEmp['lkm'].")";
-          				echo "Type: ".$rowEmp['type']."<br>";
-       				}
-    			}
-    		}
-    		
-    		
     		?>
+    	
 			</div>
 		</div>
 			<div id="footer">
