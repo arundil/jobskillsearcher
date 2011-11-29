@@ -4,7 +4,7 @@
  
 /*   div{
 	border-style: solid;
-}  */   
+}    */  
 
 body{
 	background-color: #E6E6E6;
@@ -76,7 +76,9 @@ body{
 }
 
 #main_content{
-	margin-left: 318px;
+	margin-left: 350px;
+	float: right;
+	
 	
 }
 #mainsearch {

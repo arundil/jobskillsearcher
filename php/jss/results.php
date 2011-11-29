@@ -17,7 +17,7 @@
 				<h3>Easy way to find skills you need for your future job</h3>
 			</div>
 			<div id=searcher>
-				<form action="#" method="POST">
+				<form action="#" method="GET">
 					<label for="s1">Search!</label> <input type="text" name="q"
 						id="s1" />
 					<button type="submit">GO!</button>
@@ -27,7 +27,7 @@
 					<?
 					$error = "";
 					$flagerror = false;
-					$search = $_POST['q'];
+					$search = $_GET['q'];
 					
 					$conexion = mysql_connect("localhost", "root", "");
     				mysql_select_db("JSSbd2", $conexion); 
@@ -79,6 +79,10 @@
     				$resEmp = mysql_query($queEmp, $conexion) or die(mysql_error());
     				$totEmp = mysql_num_rows($resEmp);
     			
+    				$query3 = "SELECT * FROM hjh_term_group; ";
+    				$resquery3 = mysql_query($query3, $conexion) or die(mysql_error());
+    				$totquery3 = mysql_num_rows($resquery3);
+    				
     			}
     		 
 					
@@ -89,58 +93,34 @@
 		<div id=content>
 			<div id="datahidden" style="display:none">
     		<?
+    		
+    		//Hacer filtro de calidad
     		    if ($totEmp> 0) {
        				while ($rowEmp = mysql_fetch_assoc($resEmp)) {
        					echo "<div id=".$rowEmp['type']."><p>";
-          				echo "<strong>".$rowEmp['word']."</strong>";
+          				echo "<a href= '?q=".$rowEmp['word']."'<strong>".$rowEmp['word']. "</strong></a>";
           				echo "(".$rowEmp['lkm']." results)";
           				echo "</div><p>";
        				}
     			}
     		?>
     		</div>
+    		<div id="datahiddentype" style="display:none">
+    		<?
+    		
+    			if ($totquery3 >0){
+    				while ( $rowquery3 = mysql_fetch_assoc($resquery3) ) {
+						echo "<div id='".$rowquery3['id']."'>";
+						echo $rowquery3['name']."</div>"; 
+					}
+    			}
+    		?>
+    		
+    		</div>
 			<div id=search>
 
-				<h2><?php echo htmlspecialchars($_POST['q']); ?>:</h2>
+				<h2><?php echo htmlspecialchars($_GET['q']); ?>:</h2>
 			</div>
-			<div id=menu>
-
-				<div class="title">Main skills required</div>
-				<div id="list1" class="body_menu">
-					<script type="text/javascript">
-			
-						hazlista();
-				
-					</script>
-				</div>
-
-				<div class="title">Knowledge</div>
-				<div id="list2" class="body_menu">
-					<script type="text/javascript">
-			
-						//hazlista(2);
-				
-					</script>
-				</div>
-				<div class="title">Personal Skills</div>
-				<div id=" list3" class="body_menu">
-					<script type="text/javascript">
-			
-						//hazlista(3);
-				
-					</script>
-				</div>
-				<div class="title">Other Information</div>
-				<div id="list4" class="body_menu">
-					<script type="text/javascript">
-			
-						//hazlista(4);
-				
-					</script>
-				</div>
-			</div>
-
-
 			<div id=main_content>
 				MAIN CONTENT</br>
 			<? 
@@ -152,6 +132,31 @@
     		?>
     	
 			</div>
+			<div id=menu>
+
+				<div class="title">Main skills required</div>
+				<div id="list1" class="body_menu">
+				</div>
+
+				<div class="title">Knowledge</div>
+				<div id="list2" class="body_menu">
+				
+				</div>
+				<div class="title">Personal Skills</div>
+				<div id="list3" class="body_menu">
+	
+				</div>
+				<div class="title">Other Information</div>
+				<div id="list4" class="body_menu">
+				
+				</div>
+					<script type="text/javascript">
+			
+						hazlista();
+				
+					</script>
+			</div>
+
 		</div>
 			<div id="footer">
 			<div id=options>

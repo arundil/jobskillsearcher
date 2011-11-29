@@ -31,9 +31,16 @@ function hazlista(){
 	var object = div.getElementsByTagName("div");
 	var index;
 	var cadena1="";
+	cadena=(object[0].id[object[0].id.length-2])+(object[0].id[object[0].id.length-1]);
+	alert(cadena);
 	for (index=0; index<=object.length; index++){
-		if ()
-		divtofill1.appendChild(object[index]);
-	}
-	
+		if (object[index].id == "5001")
+			divtofill1.appendChild(object[index]);
+		if (object[index].id == "5025")
+			divtofill2.appendChild(object[index]);
+		if (object[index].id == "5003")
+			divtofill3.appendChild(object[index]);
+		if (object[index].id == "5004")
+			divtofill4.appendChild(object[index]);
+	}	
 }
