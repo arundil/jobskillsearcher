@@ -22,3 +22,18 @@ function remove (element,button1,button2,graph){
 	
 }
 
+function hazlista(){
+	var div = document.getElementById("datahidden");
+	var divtofill1 = document.getElementById("list1");
+	var divtofill2 = document.getElementById("list2");
+	var divtofill3 = document.getElementById("list3");
+	var divtofill4 = document.getElementById("list4");
+	var object = div.getElementsByTagName("div");
+	var index;
+	var cadena1="";
+	for (index=0; index<=object.length; index++){
+		if ()
+		divtofill1.appendChild(object[index]);
+	}
+	
+}
