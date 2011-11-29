@@ -11,7 +11,7 @@
 	<div id=maincontent>
 		<h1>JobSkillSearcher</h1>
 		<h3>Easy way to find skills you need for your future job</h3>
-		<form action="results.php" method="post">
+		<form action="results.php" method="GET">
 			<div id="mainsearch">
 				<label for="consulta" style="font-size: 20px">Search!</label> <input
 					type="text" name='q' id="consulta"
