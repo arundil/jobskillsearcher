@@ -30,7 +30,7 @@
 					$search = $_GET['q'];
 					
 					$conexion = mysql_connect("localhost", "root", "");
-    				mysql_select_db("JSSbd2", $conexion); 
+    				mysql_select_db("JSSdb3", $conexion); 
     				
 					$consulta = "SELECT * FROM words WHERE (word = '$search')";
 					
