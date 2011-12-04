@@ -111,7 +111,9 @@
     			if ($totquery3 >0){
     				while ( $rowquery3 = mysql_fetch_assoc($resquery3) ) {
 						echo "<div id='".$rowquery3['id']."'>";
-						echo $rowquery3['name']."</div>"; 
+						echo "<h4><input type='button' class='button' name='name' value='Show' onClick='show(\"".$rowquery3['id']."\");' />";
+						echo "<input type='button' class='button' name='name' value='Remove' onClick='remove(\"".$rowquery3['id']."\");' />";
+						echo $rowquery3['name']."</h4></div>"; 
 					}
     			}
     		?>
