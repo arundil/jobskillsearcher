@@ -1,24 +1,48 @@
 
-function show (element,button1,button2,graph){
-	var div = document.getElementById(element);
-	var b1 = document.getElementById(button1);
-	var b2 = document.getElementById(button2);
-	var graph = document.getElementById(graph);
-	b1.style.display='';
-	b2.style.display='none';
-	div.style.display='';
-	graph.style.display="";
+function show (element){
+	var cad="";
+	if (element<10){
+		cad="type500"+element;
+	}
+	else{
+		cad="type50"+element;
+	}
+	var div = document.getElementById(cad);	
+	var elements = div.getElementsByTagName("div");
+	var i=0;
+	for (i=0 ; i<=elements.length-1 ;i++){
+		elements[i].style.display='';
+	}
+//	var b1 = document.getElementById(button1);
+//	var b2 = document.getElementById(button2);
+//	var graph = document.getElementById(graph);
+//	b1.style.display='';
+//	b2.style.display='none';
+//	div.style.display='';
+//	graph.style.display="";
 }
 
-function remove (element,button1,button2,graph){
-	var div = document.getElementById(element);
-	var b1 = document.getElementById(button1);
-	var b2 = document.getElementById(button2);
-	var graph = document.getElementById(graph);
-	b1.style.display='';
-	b2.style.display='none';
-	div.style.display='none';
-	graph.style.display="none";
+function remove (element){
+	var cad="";
+	if (element<10){
+		cad="type500"+element;
+	}
+	else{
+		cad="type50"+element;
+	}
+	var div = document.getElementById(cad);
+	var elements = div.getElementsByTagName("div");
+	var i=0;
+	for (i=0 ; i<=elements.length-1 ;i++){
+		elements[i].style.display='none';
+	}
+//	var b1 = document.getElementById(button1);
+//	var b2 = document.getElementById(button2);
+//	var graph = document.getElementById(graph);
+//	b1.style.display='';
+//	b2.style.display='none';
+//	div.style.display='none';
+//	graph.style.display="none";
 	
 }
 
@@ -50,13 +74,24 @@ function findElement (list, element) {
 }
 
 function getTypeById (identy) {
-	var divtype = document.getElementById("datahiddentype");
+	var div2 = document.getElementById("datahiddentype");
+	var divtype= div2.getElementsByTagName("div");
 	var i=0;
 	var type= "";
-	var cadena=(identy[identy.length-2])+(identy[words[0].id.length-1]);
-	for (i=0; i<=divtipe.length-1; i++){
-		if (divtype.id = )
+	var res;
+	var cadena=(identy[identy.length-2])+(identy[identy.length-1]);
+	if (cadena[0]==0)
+		chain= cadena[1];
+	else
+		chain = cadena;
+	for (i=0; i<=divtype.length-1; i++){
+		
+		if (divtype[i].id == chain ){
+			res = divtype[i];
+			break;
+		}
 	}
+	return res;
 }
 
 function hazlista(){
@@ -106,33 +141,29 @@ function hazlista(){
 			else
 				arraylist[arraylist.length]=words[index].id;
 			
-			var newdiv = document.createElement("div");
 			var temp = words[index];
 			
 //			alert("NEW TEMP : "+temp.id);
+			var newdiv= getTypeById(temp.id);
 			
 			if (contains(listMain, temp.id)){
 				newdiv.id = "type"+temp.id;
-				newdiv.innerHTML+="<h3>"+temp.id+"</h3>";
 				newdiv.appendChild(temp);
 				divtofill1.appendChild(newdiv);
 			}else if (contains(listKnow, temp.id)){
 				newdiv.id = "type"+temp.id;
-				newdiv.innerHTML+="<h3>"+temp.id+"</h3>";
 				newdiv.appendChild(temp);
 				divtofill2.appendChild(newdiv);
 			}else if (contains(listPers, temp.id)){
 				newdiv.id = "type"+temp.id;
-				newdiv.innerHTML+="<h3>"+temp.id+"</h3>";
 				newdiv.appendChild(temp);
 				divtofill3.appendChild(newdiv);
 			}else if (contains(listOths, temp.id)){
 				newdiv.id = "type"+temp.id;
-				newdiv.innerHTML+="<h3>"+temp.id+"</h3>";
 				newdiv.appendChild(temp);
 				divtofill4.appendChild(newdiv);
 			}
-			alert("Vista de Array List: "+arraylist);
+			//alert("Vista de Array List: "+arraylist);
 		}
 
 	}
