@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>JobSkillSearcher -Template 1-</title>
+<title>--JobSkillSearcher--</title>
 
 <script language="JavaScript" src="media/javascript/jstemplate1.js"
 	type="text/javascript"></script>
@@ -25,6 +25,8 @@
 			</div>
 			<div id="error">					
 					<?
+					//$timestart = explode (' ', microtime());
+  					//$noofwords = 0;
 					$error = "";
 					$flagerror = false;
 					$search = $_GET['q'];
@@ -68,20 +70,30 @@
     					}
     		
     		  		
-    				$queEmp = "SELECT word, type, count(word) as lkm FROM wlist INNER JOIN words ON wlist.wid=words.id 
+    				$queEmp = "SELECT word, type, count(word) as lkm FROM wlist LEFT JOIN words ON wlist.wid=words.id 
     				WHERE ($cadena) AND type!=3 AND type!=0 AND type!=701 GROUP BY word ORDER BY lkm DESC, word;";
     		
     		
    	 				//echo "$queEmp";  
         		
-    			
-    			
     				$resEmp = mysql_query($queEmp, $conexion) or die(mysql_error());
     				$totEmp = mysql_num_rows($resEmp);
     			
     				$query3 = "SELECT * FROM hjh_term_group; ";
     				$resquery3 = mysql_query($query3, $conexion) or die(mysql_error());
     				$totquery3 = mysql_num_rows($resquery3);
+    				
+    				// insert into log
+  					//$query4 = "INSERT INTO searchlog VALUES ('$term', $noofjids, $noofwords, '$totaltime', NULL, '$ip');";
+
+  					//if ( !$result = mysql_query($query4, $connection) ) {
+     				//	die('Could not execute the query: ' . mysql_error($connection));
+  					//}
+
+					// echo "$query";
+
+ 					 mysql_close($conexion);
+    				
     				
     			}
     		 
@@ -111,8 +123,8 @@
     			if ($totquery3 >0){
     				while ( $rowquery3 = mysql_fetch_assoc($resquery3) ) {
 						echo "<div id='".$rowquery3['id']."'>";
-						echo "<h4><input type='button' class='button' name='sho' value='Show' onClick='show(\"".$rowquery3['id']."\");' />";
-						echo "<input type='button' class='button' name='rem' value='Remove' onClick='remove(\"".$rowquery3['id']."\");' style=\"display:none;\" />";
+						echo "<h4><input type='image' src='media/img/rigthT.gif' width='20' height='20' class='button' name='sho' onClick='show(\"".$rowquery3['id']."\");' />";
+						echo "<input type='image' src='media/img/downT.gif' width='20' height='20' class='button' name='rem' onClick='remove(\"".$rowquery3['id']."\");' style=\"display:none;\" />";
 						echo $rowquery3['name']."</h4></div>"; 
 					}
     			}
@@ -120,8 +132,16 @@
     		
     		</div>
 			<div id=search>
+			<div id= "menu_paginado">
+				<a href="tends.php">Look word trends</a>
+			</div>
 
-				<h2><?php echo htmlspecialchars($row['word'])." (appears in ".$rowEmp['lkm']."advertisments)"; ?>:</h2>
+				<?php
+				
+				 if (!$error)
+				 	echo "<h2>".$row['word']." :</h2><h4>appears in [NUMBER] advertisments</h4>"; 
+				 else
+				 	echo "<h2>No results found :</h2>" ?>
 			</div>
 			<div id=main_content>
 				MAIN CONTENT</br>

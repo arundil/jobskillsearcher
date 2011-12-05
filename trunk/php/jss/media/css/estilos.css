@@ -2,9 +2,9 @@
 
 @CHARSET "UTF-8";
  
-/*   div{
+/*      div{
 	border-style: solid;
-}    */  
+}  */       
 
 body{
 	background-color: #E6E6E6;
@@ -34,8 +34,8 @@ body{
 
 #logo{
 	float: left;
-	margin-left: 10px;
-	padding: 10px 0;
+	
+
 }
 
 #searcher{
@@ -58,8 +58,8 @@ body{
 
 #header{
 	background-color:white;
-	padding: 10px;
-	height : 300 px;
+	padding-left:10px;
+	height : 200 px;
 	border: solid;
 }
 
@@ -70,13 +70,12 @@ body{
 }
 
 #menu{
-	
-	width: 300px;
-	
+	width: 250px;
 }
 
 #main_content{
-	margin-left: 350px;
+	height: 300px;
+	width: 725px;
 	float: right;
 	
 	
@@ -84,6 +83,13 @@ body{
 #mainsearch {
 	margin-top : 200px;
 	text-align: center;
+}
+
+#menu_paginado{
+	float:right;
+	background-color: graytext;	
+	font-size: large;
+	border: solid;
 }
 
 .title{
@@ -101,21 +107,6 @@ body{
 	padding: 5px;
 	margin-bottom: 15px;
 	font-size:smaller;
-}
-
-ul.ulnav li{
-	list-style: none;
-}
-
-.float{
-	float: left;
-	padding: 4px;
-	font-size: 105%;
-	font-weight: bold;
-}
-
-.button{
-	float: ri;
 }
 
 a:visited {
