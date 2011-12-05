@@ -68,7 +68,7 @@
     					}
     		
     		  		
-    				$queEmp = "SELECT word, type, count(word) as lkm FROM wlist LEFT JOIN words ON wlist.wid=words.id 
+    				$queEmp = "SELECT word, type, count(word) as lkm FROM wlist INNER JOIN words ON wlist.wid=words.id 
     				WHERE ($cadena) AND type!=3 AND type!=0 AND type!=701 GROUP BY word ORDER BY lkm DESC, word;";
     		
     		
@@ -97,7 +97,7 @@
     		//Hacer filtro de calidad
     		    if ($totEmp> 0) {
        				while ($rowEmp = mysql_fetch_assoc($resEmp)) {
-       					echo "<div id=".$rowEmp['type']."><p>";
+       					echo "<div id=".$rowEmp['type']." style=\"display:none;\" ><p>";
           				echo "<a href= '?q=".$rowEmp['word']."'<strong>".$rowEmp['word']. "</strong></a>";
           				echo "(".$rowEmp['lkm']." results)";
           				echo "</div><p>";
@@ -111,8 +111,8 @@
     			if ($totquery3 >0){
     				while ( $rowquery3 = mysql_fetch_assoc($resquery3) ) {
 						echo "<div id='".$rowquery3['id']."'>";
-						echo "<h4><input type='button' class='button' name='name' value='Show' onClick='show(\"".$rowquery3['id']."\");' />";
-						echo "<input type='button' class='button' name='name' value='Remove' onClick='remove(\"".$rowquery3['id']."\");' />";
+						echo "<h4><input type='button' class='button' name='sho' value='Show' onClick='show(\"".$rowquery3['id']."\");' />";
+						echo "<input type='button' class='button' name='rem' value='Remove' onClick='remove(\"".$rowquery3['id']."\");' style=\"display:none;\" />";
 						echo $rowquery3['name']."</h4></div>"; 
 					}
     			}
@@ -121,7 +121,7 @@
     		</div>
 			<div id=search>
 
-				<h2><?php echo htmlspecialchars($_GET['q']); ?>:</h2>
+				<h2><?php echo htmlspecialchars($row['word'])." (appears in ".$rowEmp['lkm']."advertisments)"; ?>:</h2>
 			</div>
 			<div id=main_content>
 				MAIN CONTENT</br>
