@@ -9,12 +9,13 @@ function show (element){
 	}
 	var div = document.getElementById(cad);	
 	var elements = div.getElementsByTagName("div");
+	var buttons = div.getElementsByTagName("input");
 	var i=0;
 	for (i=0 ; i<=elements.length-1 ;i++){
 		elements[i].style.display='';
 	}
-//	var b1 = document.getElementById(button1);
-//	var b2 = document.getElementById(button2);
+	buttons[0].style.display="none";
+	buttons[1].style.display=""; 
 //	var graph = document.getElementById(graph);
 //	b1.style.display='';
 //	b2.style.display='none';
@@ -32,10 +33,13 @@ function remove (element){
 	}
 	var div = document.getElementById(cad);
 	var elements = div.getElementsByTagName("div");
+	var buttons = div.getElementsByTagName("input");
 	var i=0;
 	for (i=0 ; i<=elements.length-1 ;i++){
 		elements[i].style.display='none';
 	}
+	buttons[0].style.display="";
+	buttons[1].style.display="none"; 
 //	var b1 = document.getElementById(button1);
 //	var b2 = document.getElementById(button2);
 //	var graph = document.getElementById(graph);
