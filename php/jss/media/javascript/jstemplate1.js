@@ -1,3 +1,10 @@
+//Global Var's!
+
+var listMain = ["5001","5002","5006","5007","5008","5009","5013","5024","5023","5036","5037","5038","5040","5041","5042","5043","5069"];
+var listKnow = ["5025","5026","5030","5032"];
+var listPers = ["5003","5027","5028","5029","5031","5033","5034","5035","5039"];
+var listOths = ["5004","5005","5010","5054","5055","5056","5057","5058","5059","5060","5061","5062","5063","5064","5065","5066","5067","5068"];
+
 
 function show (element){
 	var cad="";
@@ -10,17 +17,18 @@ function show (element){
 	var div = document.getElementById(cad);	
 	var elements = div.getElementsByTagName("div");
 	var buttons = div.getElementsByTagName("input");
+	var get_main_content = document.getElementById("main_content");
+	var chart_div= document.createElement("div");
+	chart_div.id="chart_div"+cad;
+	get_main_content.appendChild(chart_div);
 	var i=0;
 	for (i=0 ; i<=elements.length-1 ;i++){
 		elements[i].style.display='';
 	}
 	buttons[0].style.display="none";
 	buttons[1].style.display=""; 
-//	var graph = document.getElementById(graph);
-//	b1.style.display='';
-//	b2.style.display='none';
-//	div.style.display='';
-//	graph.style.display="";
+	
+	google.setOnLoadCallback(drawChart(chart_div.id));
 }
 
 function remove (element){
@@ -34,20 +42,16 @@ function remove (element){
 	var div = document.getElementById(cad);
 	var elements = div.getElementsByTagName("div");
 	var buttons = div.getElementsByTagName("input");
+	var get_main_content = document.getElementById("main_content");
+	var get_div_toRemove = document.getElementById("chart_div"+cad);
 	var i=0;
 	for (i=0 ; i<=elements.length-1 ;i++){
 		elements[i].style.display='none';
 	}
 	buttons[0].style.display="";
 	buttons[1].style.display="none"; 
-//	var b1 = document.getElementById(button1);
-//	var b2 = document.getElementById(button2);
-//	var graph = document.getElementById(graph);
-//	b1.style.display='';
-//	b2.style.display='none';
-//	div.style.display='none';
-//	graph.style.display="none";
 	
+	get_main_content.removeChild(get_div_toRemove);
 }
 
 function contains (list, element){
@@ -109,10 +113,6 @@ function hazlista(){
 	var index;
 	var cadena="";
 	
-	var listMain = ["5001","5002","5006","5007","5008","5009","5013","5024","5023","5036","5037","5038","5040","5041","5042","5043","5069"];
-	var listKnow = ["5025","5026","5030","5032"];
-	var listPers = ["5003","5027","5028","5029","5031","5033","5034","5035","5039"];
-	var listOths = ["5004","5005","5010","5054","5055","5056","5057","5058","5059","5060","5061","5062","5063","5064","5065","5066","5067","5068"];
 	
 	
 	//alert(cadena);
@@ -171,4 +171,34 @@ function hazlista(){
 		}
 
 	}
+}
+//Api google
+
+google.load('visualization', '1.0', {'packages':['corechart']});
+
+
+function drawChart(chart_div) {
+
+    // Create the data table.
+    var data = new google.visualization.DataTable();
+    var cad="" ;
+    cad= document.getElementById(chart_div.substring(chart_div.length-8,chart_div.length));
+    data.addColumn('string', 'Topping');
+    data.addColumn('number', 'Slices');
+    data.addRows([
+      ['Mushrooms', 3],
+      ['Onions', 1],
+      ['Olives', 1], 
+      ['Zucchini', 1],
+      ['Pepperoni', 2]
+    ]);
+    // Set chart options
+    var options = {'title':cad.title,
+                   'width':600,
+                   'height':300};
+
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.PieChart(document.getElementById(chart_div));
+    chart.draw(data, options);
+  
 }
