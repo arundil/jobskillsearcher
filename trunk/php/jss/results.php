@@ -4,9 +4,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>--JobSkillSearcher--</title>
 
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script language="JavaScript" src="media/javascript/jstemplate1.js"
 	type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="media/css/estilos.css">
+
 </head>
 
 <body>
@@ -17,7 +19,7 @@
 				<h3>Easy way to find skills you need for your future job</h3>
 			</div>
 			<div id=searcher>
-				<form action="#" method="GET">
+				<form action="" method="GET">
 					<label for="s1">Search!</label> <input type="text" name="q"
 						id="s1" />
 					<button type="submit">GO!</button>
@@ -99,13 +101,14 @@
     		 
 					
 			?>
+			<div id="id"  ></div>
 			 </div>
 			<div class="nofloat"></div>
 		</div>
 		<div id=content>
 			<div id="datahidden" style="display:none">
     		<?
-    		
+    		$cuenta=0;
     		//Hacer filtro de calidad
     		    if ($totEmp> 0) {
        				while ($rowEmp = mysql_fetch_assoc($resEmp)) {
@@ -113,6 +116,9 @@
           				echo "<a href= '?q=".$rowEmp['word']."'<strong>".$rowEmp['word']. "</strong></a>";
           				echo "(".$rowEmp['lkm']." results)";
           				echo "</div><p>";
+          				if (trim(strtolower($rowEmp['word'])) == trim(strtolower($_GET['q']))){
+          					$cuenta = $rowEmp['lkm'];
+          				}
        				}
     			}
     		?>
@@ -122,7 +128,7 @@
     		
     			if ($totquery3 >0){
     				while ( $rowquery3 = mysql_fetch_assoc($resquery3) ) {
-						echo "<div id='".$rowquery3['id']."'>";
+						echo "<div id='".$rowquery3['id']."' title='".$rowquery3['name']."'>";
 						echo "<h4><input type='image' src='media/img/rigthT.gif' width='20' height='20' class='button' name='sho' onClick='show(\"".$rowquery3['id']."\");' />";
 						echo "<input type='image' src='media/img/downT.gif' width='20' height='20' class='button' name='rem' onClick='remove(\"".$rowquery3['id']."\");' style=\"display:none;\" />";
 						echo $rowquery3['name']."</h4></div>"; 
@@ -139,20 +145,11 @@
 				<?php
 				
 				 if (!$error)
-				 	echo "<h2>".$row['word']." :</h2><h4>appears in [NUMBER] advertisments</h4>"; 
+				 	echo "<h2>".$row['word']." :</h2><h4>This word appears in ".$cuenta." advertisments</h4>"; 
 				 else
 				 	echo "<h2>No results found :</h2>" ?>
 			</div>
 			<div id=main_content>
-				MAIN CONTENT</br>
-			<? 
-    		
-    		
-   			
-   			echo "<h2> Palabra buscada: ".$row['word']."</h2>";
-						
-    		?>
-    	
 			</div>
 			<div id=menu>
 
