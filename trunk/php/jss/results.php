@@ -114,7 +114,7 @@
        				while ($rowEmp = mysql_fetch_assoc($resEmp)) {
        					echo "<div id=".$rowEmp['type']." style=\"display:none;\" ><p>";
           				echo "<a href= '?q=".$rowEmp['word']."'<strong>".$rowEmp['word']. "</strong></a>";
-          				echo "(".$rowEmp['lkm']." results)";
+          				echo " (<label>".$rowEmp['lkm']."</label> results)";
           				echo "</div><p>";
           				if (trim(strtolower($rowEmp['word'])) == trim(strtolower($_GET['q']))){
           					$cuenta = $rowEmp['lkm'];
@@ -145,7 +145,7 @@
 				<?php
 				
 				 if (!$error)
-				 	echo "<h2>".$row['word']." :</h2><h4>This word appears in ".$cuenta." advertisments</h4>"; 
+				 	echo "<h2>".$row['word']." :</h2><h4>This word appears in ".$cuenta." advertisements</h4>"; 
 				 else
 				 	echo "<h2>No results found :</h2>" ?>
 			</div>

@@ -181,24 +181,31 @@ function drawChart(chart_div) {
 
     // Create the data table.
     var data = new google.visualization.DataTable();
-    var cad="" ;
-    cad= document.getElementById(chart_div.substring(chart_div.length-8,chart_div.length));
-    data.addColumn('string', 'Topping');
-    data.addColumn('number', 'Slices');
-    data.addRows([
-      ['Mushrooms', 3],
-      ['Onions', 1],
-      ['Olives', 1], 
-      ['Zucchini', 1],
-      ['Pepperoni', 2]
-    ]);
+    
+    var cad= document.getElementById(chart_div.substring(chart_div.length-8,chart_div.length));
+    var dataincad = cad.getElementsByTagName('div');
+    var k=0;
+    
+    data.addColumn('string', 'Word');
+    data.addColumn('number', 'Nº of times this word is mentioned in the advs. which contains the word searched');
+    
+   var array= [];
+   var labels;
+   for (k=0; k<=dataincad.length-1; k++){
+		labels= dataincad[k].getElementsByTagName('LABEL');
+	   	array[array.length]=[dataincad[k].firstChild.firstChild.textContent,parseInt(labels[0].textContent)];
+   }
+   data.addRows(array);
+
+
     // Set chart options
     var options = {'title':cad.title,
                    'width':600,
-                   'height':300};
+                   'height':400,
+                   'colors':['black']};
 
     // Instantiate and draw our chart, passing in some options.
-    var chart = new google.visualization.PieChart(document.getElementById(chart_div));
+    var chart = new google.visualization.BarChart(document.getElementById(chart_div));
     chart.draw(data, options);
   
 }

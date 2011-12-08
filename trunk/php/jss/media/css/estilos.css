@@ -1,6 +1,4 @@
 @CHARSET "UTF-8";
-
-@CHARSET "UTF-8";
  
 /*      div{
 	border-style: solid;
@@ -110,10 +108,11 @@ body{
 }
 
 a:visited {
-	text-decoration: none;
+	text-decoration: underline;
 	color: black;
 }
 
 a:LINK {
-
+	text-decoration: underline;
+	color: black;
 }
