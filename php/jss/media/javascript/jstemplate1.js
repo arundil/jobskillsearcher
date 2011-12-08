@@ -5,6 +5,14 @@ var listKnow = ["5025","5026","5030","5032"];
 var listPers = ["5003","5027","5028","5029","5031","5033","5034","5035","5039"];
 var listOths = ["5004","5005","5010","5054","5055","5056","5057","5058","5059","5060","5061","5062","5063","5064","5065","5066","5067","5068"];
 
+window.onload = function fistpresentation (){
+	var list1 = document.getElementById("list1");
+	var elemlist1= list1.getElementsByTagName("div");
+	var elementopen=elemlist1[0].id;
+	var cadena=(elementopen[elementopen.length-2])+(elementopen[elementopen.length-1]);
+	show(parseInt(cadena));
+}
+
 
 function show (element){
 	var cad="";
@@ -29,6 +37,7 @@ function show (element){
 	buttons[1].style.display=""; 
 	
 	google.setOnLoadCallback(drawChart(chart_div.id));
+	
 }
 
 function remove (element){
