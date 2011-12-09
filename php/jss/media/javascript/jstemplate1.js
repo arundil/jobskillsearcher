@@ -5,16 +5,35 @@ var listKnow = ["5025","5026","5030","5032"];
 var listPers = ["5003","5027","5028","5029","5031","5033","5034","5035","5039"];
 var listOths = ["5004","5005","5010","5054","5055","5056","5057","5058","5059","5060","5061","5062","5063","5064","5065","5066","5067","5068"];
 
+var flag = false;
+
 window.onload = function fistpresentation (){
 	var list1 = document.getElementById("list1");
 	var elemlist1= list1.getElementsByTagName("div");
 	var elementopen=elemlist1[0].id;
 	var cadena=(elementopen[elementopen.length-2])+(elementopen[elementopen.length-1]);
-	show(parseInt(cadena));
+	if (cadena[0]==0)
+		show(cadena[1]);
+	else
+		show(cadena);
+	flag=true;
 }
 
 
 function show (element){
+	var get_main_content = document.getElementById("main_content");
+	
+	if (flag){
+	var element_main_content = get_main_content.getElementsByTagName("div");
+	var elementremove= element_main_content[0].id;
+	var cadena=(elementremove[elementremove.length-2])+(elementremove[elementremove.length-1]);
+	if (cadena[0]==0)
+		remove(cadena[1]);
+	else
+		remove(cadena);
+	flag=false;
+	}
+
 	var cad="";
 	if (element<10){
 		cad="type500"+element;
@@ -25,7 +44,6 @@ function show (element){
 	var div = document.getElementById(cad);	
 	var elements = div.getElementsByTagName("div");
 	var buttons = div.getElementsByTagName("input");
-	var get_main_content = document.getElementById("main_content");
 	var chart_div= document.createElement("div");
 	chart_div.id="chart_div"+cad;
 	get_main_content.appendChild(chart_div);
@@ -35,8 +53,10 @@ function show (element){
 	}
 	buttons[0].style.display="none";
 	buttons[1].style.display=""; 
-	
+		
 	google.setOnLoadCallback(drawChart(chart_div.id));
+	
+	flag=true;
 	
 }
 
@@ -61,6 +81,7 @@ function remove (element){
 	buttons[1].style.display="none"; 
 	
 	get_main_content.removeChild(get_div_toRemove);
+	flag=false;
 }
 
 function contains (list, element){
