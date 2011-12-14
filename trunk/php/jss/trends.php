@@ -7,6 +7,19 @@
 <script language="JavaScript" src="media/javascript/jstemplate1.js"
 	type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="media/css/estilos.css">
+<?php
+$conexion = mysql_connect("localhost", "root", "");
+mysql_select_db("JSSdb3", $conexion);   
+$search = $_GET['q'];
+
+$consulta = "SELECT * FROM words,wlist,jannouncement WHERE (words.id = wlist.wid AND jannouncement.id = wlist.jid AND  word = '$search')";
+
+$resconsulta = mysql_query($consulta,$conexion) or die(mysql_error());
+$col = mysql_num_rows($resconsulta);
+ mysql_close($conexion);
+?>
+
+
 </head>
 
 <body>
@@ -29,11 +42,18 @@
 		<div id=content>	
 			<div id=search>
 				<div id= "menu_paginado">
-					<a href="results.php">Look word results</a>
+					<?php echo "<a href= 'results.php?q=".$search."'>Look word results</a>";?>
 				</div>
 			</div>
 			<div id=contenidoprincipal>
 				MAIN CONTENT</br>
+				<?
+				 if ($col > 0) {
+					while ($row = mysql_fetch_assoc($resconsulta)){
+    		  			echo $row['word']." ".$row['date']."</BR>";
+						}
+				 }
+				?>
 			</div>
 		</div>
 			<div id="footer">

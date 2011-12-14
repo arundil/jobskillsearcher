@@ -139,7 +139,8 @@
     		</div>
 			<div id=search>
 			<div id= "menu_paginado">
-				<a href="tends.php">Look word trends</a>
+			<?php echo "<a href= 'trends.php?q=".$search."'>Look word trend</a>";?>
+			
 			</div>
 
 				<?php
@@ -147,7 +148,10 @@
 				 if (!$error)
 				 	echo "<h2>".$row['word']." :</h2><h4>This word appears in ".$cuenta." advertisements</h4>"; 
 				 else
-				 	echo "<h2>No results found :</h2>" ?>
+				 	echo "<h2>No results found :</h2>" 
+				 
+				 ?>
+				 	
 			</div>
 			<div id=main_content>
 			</div>
