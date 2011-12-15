@@ -16,7 +16,7 @@ $consulta = "SELECT * FROM words,wlist,jannouncement WHERE (words.id = wlist.wid
 
 $resconsulta = mysql_query($consulta,$conexion) or die(mysql_error());
 $col = mysql_num_rows($resconsulta);
- mysql_close($conexion);
+
 ?>
 
 
@@ -36,6 +36,39 @@ $col = mysql_num_rows($resconsulta);
 					<button type="submit">GO!</button>
 				</form>
 			</div>
+						<div id="error">					
+					<?
+					//$timestart = explode (' ', microtime());
+  					//$noofwords = 0;
+					$error = "";
+					$flagerror = false;
+					
+					$consulta = "SELECT * FROM words WHERE (word = '$search')";
+					
+					$resconsulta = mysql_query($consulta,$conexion) or die(mysql_error());
+    				$col = mysql_num_rows($resconsulta);
+    		
+    				if (!$col>0){
+    					if ($search == "")
+    				 		$error ='Please, write a word in the text-box and them click GO!   ';
+    					else
+    				 		$error = 'The word does not exist or is not registered even in the database';
+    					$flagerror = true;
+    				}
+    				//muestra el error en la página web
+					echo $error;	 
+    				
+    				
+
+ 					 mysql_close($conexion);
+    				
+    				
+    			
+    		 
+					
+			?>
+			<div id="id"  ></div>
+			 </div>
  		<div class="nofloat"></div>
 		</div>	
 		
@@ -44,7 +77,14 @@ $col = mysql_num_rows($resconsulta);
 				<div id= "menu_paginado">
 					<?php echo "<a href= 'results.php?q=".$search."'>Look word results</a>";?>
 				</div>
+					<?php
+				 if (!$error)
+				 	echo "<h2>".$row['word']." :</h2><h4>This word appears in ".$cuenta." advertisements</h4>"; 
+				 else
+				 	echo "<h2>No results found :</h2>" 
+				 	?>
 			</div>
+			
 			<div id=contenidoprincipal>
 				MAIN CONTENT</br>
 				<?
