@@ -239,3 +239,30 @@ function drawChart(chart_div) {
     chart.draw(data, options);
   
 }
+
+google.load("visualization", "1", {packages:["corechart"]});
+
+google.setOnLoadCallback(drawChartTrends);
+
+function drawChartTrends() {
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'days');
+    data.addColumn('number', 'Nº advertisment per day');
+    data.addRows([
+      ['2004', 1000],
+      ['2005', 1170],
+      ['2006', 660],
+      ['2007', 1030]
+    ]);
+
+    var options = {
+      width: 580, height: 260,
+      title: 'Trends of this word',
+      vAxis: {title: 'Nº Advertisments',  titleTextStyle: {color: 'red'}}
+    };
+
+    var chart = new google.visualization.AreaChart(document.getElementById('chart'));
+    chart.draw(data, options);    
+  }
+
+
