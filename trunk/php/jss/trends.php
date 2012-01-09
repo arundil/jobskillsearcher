@@ -4,10 +4,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>--JobSkillSearcher--</title>
 
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script language="JavaScript" src="media/javascript/jstemplate1.js"
 	type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="media/css/estilos.css">
 <?php
+
 $conexion = mysql_connect("localhost", "root", "");
 mysql_select_db("JSSdb3", $conexion);   
 $search = $_GET['q'];
@@ -43,12 +45,12 @@ $col = mysql_num_rows($resconsulta);
 					$error = "";
 					$flagerror = false;
 					
-					$consulta = "SELECT * FROM words WHERE (word = '$search')";
+					$consulta2 = "SELECT * FROM words WHERE (word = '$search')";
 					
-					$resconsulta = mysql_query($consulta,$conexion) or die(mysql_error());
-    				$col = mysql_num_rows($resconsulta);
+					$resconsulta2 = mysql_query($consulta2,$conexion) or die(mysql_error());
+    				$col2 = mysql_num_rows($resconsulta2);
     		
-    				if (!$col>0){
+    				if (!$col2>0){
     					if ($search == "")
     				 		$error ='Please, write a word in the text-box and them click GO!   ';
     					else
@@ -58,6 +60,7 @@ $col = mysql_num_rows($resconsulta);
     				//muestra el error en la página web
 					echo $error;	 
     				
+					$row2 = mysql_fetch_assoc($resconsulta2);
     				
 
  					 mysql_close($conexion);
@@ -67,6 +70,30 @@ $col = mysql_num_rows($resconsulta);
     		 
 					
 			?>
+			<div id="hiddendata" style="display:none">
+				<?
+				 if ($col > 0) {
+				 		$row = mysql_fetch_assoc($resconsulta);
+						$count =0;
+						$globalcount=1;
+						$aux=$row['date'];
+					while ($row = mysql_fetch_assoc($resconsulta)){
+						
+						if ($aux != $row['date'] ){
+							$count = $count+1;
+    		  				echo $row['word']." ".$row['date']." ".$count."</BR>";
+    		  				$count=0;
+    		  				$aux=$row['date'];
+						}
+						else{
+							$count = $count+1;					
+						}
+						$globalcount= $globalcount+1;
+					}
+					echo $globalcount;
+				 }
+				?>
+				 </div>
 			<div id="id"  ></div>
 			 </div>
  		<div class="nofloat"></div>
@@ -79,21 +106,16 @@ $col = mysql_num_rows($resconsulta);
 				</div>
 					<?php
 				 if (!$error)
-				 	echo "<h2>".$row['word']." :</h2><h4>This word appears in ".$cuenta." advertisements</h4>"; 
+				 	echo "<h2>".$row2['word']." :</h2><h4>This word appears in ".$globalcount." advertisements</h4>"; 
 				 else
 				 	echo "<h2>No results found :</h2>" 
 				 	?>
 			</div>
 			
-			<div id=contenidoprincipal>
-				MAIN CONTENT</br>
-				<?
-				 if ($col > 0) {
-					while ($row = mysql_fetch_assoc($resconsulta)){
-    		  			echo $row['word']." ".$row['date']."</BR>";
-						}
-				 }
-				?>
+			<div id="contenidoprincipal">
+				
+				 <div id="chart">
+				 </div>
 			</div>
 		</div>
 			<div id="footer">
