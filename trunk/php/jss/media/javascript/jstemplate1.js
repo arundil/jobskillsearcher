@@ -246,17 +246,24 @@ google.setOnLoadCallback(drawChartTrends);
 
 function drawChartTrends() {
     var data = new google.visualization.DataTable();
+    var div = document.getElementById ("hiddendata");
+    var contentdiv = div.getElementsByTagName('div');
+    
     data.addColumn('string', 'days');
-    data.addColumn('number', 'Nº advertisment per day');
-    data.addRows([
-      ['2004', 1000],
-      ['2005', 1170],
-      ['2006', 660],
-      ['2007', 1030]
-    ]);
+    data.addColumn('number', 'Nº advs. per day');
+    
+    var array= [];
+    
+    for (k=0; k<=contentdiv.length-1; k++){
+		var auxdate= contentdiv[k].id;
+		var auxnumber= contentdiv[k].title;
+	   	array[array.length]=[auxdate,parseInt(auxnumber)];
+   }
+    
+    data.addRows(array);
 
     var options = {
-      width: 580, height: 260,
+      width: 1000, height: 260,
       title: 'Trends of this word',
       vAxis: {title: 'Nº Advertisments',  titleTextStyle: {color: 'red'}}
     };
