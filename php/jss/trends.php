@@ -67,10 +67,16 @@ $col = mysql_num_rows($resconsulta);
     				
     				
     			
-    		 
+    		
 					
 			?>
-			<div id="hiddendata" style="display:none">
+			</div>
+ 		<div class="nofloat"></div>
+		</div>	
+		
+		<div id=content>
+		
+				<div id="hiddendata" style="display:none">
 				<?
 				 if ($col > 0) {
 				 		$row = mysql_fetch_assoc($resconsulta);
@@ -81,7 +87,7 @@ $col = mysql_num_rows($resconsulta);
 						
 						if ($aux != $row['date'] ){
 							$count = $count+1;
-    		  				echo $row['word']." ".$row['date']." ".$count."</BR>";
+    		  				echo "<div id='".$row['date']."' title='".$count."'>".$row['date']." ".$count."</br></div>";
     		  				$count=0;
     		  				$aux=$row['date'];
 						}
@@ -93,13 +99,7 @@ $col = mysql_num_rows($resconsulta);
 					echo $globalcount;
 				 }
 				?>
-				 </div>
-			<div id="id"  ></div>
-			 </div>
- 		<div class="nofloat"></div>
-		</div>	
-		
-		<div id=content>	
+				 </div>	
 			<div id=search>
 				<div id= "menu_paginado">
 					<?php echo "<a href= 'results.php?q=".$search."'>Look word results</a>";?>
