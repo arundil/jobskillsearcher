@@ -75,9 +75,15 @@ body{
 	height: 300px;
 	width: 675px;
 	float: right;
-	
-	
 }
+
+#main_content_error{
+	padding-top:100px;
+	height: 300px;
+	width: 675px;
+	float: right;
+}
+
 #mainsearch {
 	margin-top : 200px;
 	text-align: center;

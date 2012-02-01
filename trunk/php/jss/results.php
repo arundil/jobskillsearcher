@@ -15,7 +15,7 @@
 	<div id=container>
 		<div id="header">
 			<div id=logo>
-				<h1>JobSkillSearcher</h1>
+				<a href="index.php" ><h1>JobSkillSearcher</h1></a>
 				<h3>Easy way to find skills you need for your future job</h3>
 			</div>
 			<div id=searcher>
@@ -43,9 +43,10 @@
     		
     				if (!$col>0){
     					if ($search == "")
-    				 		$error ='Please, write a word in the text-box and them click GO!   ';
+    				 		header('Location:error404.php');
     					else
-    				 		$error = 'The word does not exist or is not registered even in the database';
+							header('Location: error404.php');
+							
     					$flagerror = true;
     				}
     				//muestra el error en la página web
