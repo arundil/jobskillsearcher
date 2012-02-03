@@ -7,21 +7,21 @@
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script language="JavaScript" src="media/javascript/jstemplate1.js"
 	type="text/javascript"></script>
-<link media="screen" rel="stylesheet" type="text/css" href="media/css/estilos.css">
+<link rel="stylesheet" type="text/css" href="media/css/estilos.css">
 
 </head>
 
 <body>
-	<div id="container">
+	<div id=container>
 		<div id="header">
 			<div id=logo>
-				<h1> JobSkillSearcher </h1>
+				<a href="index.php" ><h1>JobSkillSearcher</h1></a>
 				<h3>Easy way to find skills you need for your future job</h3>
 			</div>
 			<div id=searcher>
 				<form action="" method="GET">
 					<label for="s1">Search!</label> <input type="text" name="q"
-						id="s1" >
+						id="s1" />
 					<button type="submit">GO!</button>
 				</form>
 			</div>
@@ -102,17 +102,47 @@
     		 
 					
 			?>
-			
 			<div id="id"  ></div>
 			 </div>
 			<div class="nofloat"></div>
 		</div>
-		<div id="content">
+		<div id=content>
+			<div id="datahidden" style="display:none">
+    		<?
+    		$cuenta=0;
+    		//Hacer filtro de calidad
+    		    if ($totEmp> 0) {
+       				while ($rowEmp = mysql_fetch_assoc($resEmp)) {
+       					echo "<div id=".$rowEmp['type']." style=\"display:none;\" ><p>";
+          				echo "<a href= '?q=".$rowEmp['word']."'<strong>".$rowEmp['word']. "</strong></a>";
+          				echo " (<label>".$rowEmp['lkm']."</label> results)";
+          				echo "</div><p>";
+          				if (trim(strtolower($rowEmp['word'])) == trim(strtolower($_GET['q']))){
+          					$cuenta = $rowEmp['lkm'];
+          				}
+       				}
+    			}
+    		?>
+    		</div>
+    		<div id="datahiddentype" style="display:none">
+    		<?
     		
+    			if ($totquery3 >0){
+    				while ( $rowquery3 = mysql_fetch_assoc($resquery3) ) {
+						echo "<div id='".$rowquery3['id']."' title='".$rowquery3['name']."'>";
+						echo "<h4><input type='image' src='media/img/rigthT.gif' width='20' height='20' class='button' name='sho' onClick='show(\"".$rowquery3['id']."\");' />";
+						echo "<input type='image' src='media/img/downT.gif' width='20' height='20' class='button' name='rem' onClick='remove(\"".$rowquery3['id']."\");' style=\"display:none;\" />";
+						echo $rowquery3['name']."</h4></div>"; 
+					}
+    			}
+    		?>
+    		
+    		</div>
 			<div id=search>
-				<div id= "menu_paginado">
-					<?php echo "<a href= 'trends.php?q=".$search."'>Look word trend</a>";?>
-				</div>
+			<div id= "menu_paginado">
+			<?php echo "<a href= 'trends.php?q=".$search."'>Look word trend</a>";?>
+			
+			</div>
 
 				<?php
 				
@@ -124,95 +154,39 @@
 				 ?>
 				 	
 			</div>
-			
-				<div id="datahidden" style="display:''">
-    		<?
-    		$cuenta=0;
-    		//Palabras sin agrupar!!!!
-    		    if ($totEmp> 0) {
-       				while ($rowEmp = mysql_fetch_assoc($resEmp)) {
-       					echo $rowEmp['type'];
-          				echo "<a href= '?q=".$rowEmp['word']."'<strong>".$rowEmp['word']. "</strong></a>";
-          				echo " (<label>".$rowEmp['lkm']."</label> results)";
-          				echo "<p>";
-          				if (trim(strtolower($rowEmp['word'])) == trim(strtolower($_GET['q']))){
-          					$cuenta = $rowEmp['lkm'];
-          				}
-       				}
-    			}
-    		?>
-			
-    		<div id="datahiddentype" style="display:''">
-    		<?
-    		// Aqui estan los tipos de palabras que deben contener a otras 
-    			if ($totquery3 >0){
-    				while ( $rowquery3 = mysql_fetch_assoc($resquery3) ) {
-						echo $rowquery3['id']. " ".$rowquery3['name'];
-						//echo "<h4><input type='image' src='media/img/rigthT.gif' width='20' height='20' class='button' name='sho' onClick='show(\"".$rowquery3['id']."\");' />";
-						//echo "<input type='image' src='media/img/downT.gif' width='20' height='20' class='button' name='rem' onClick='remove(\"".$rowquery3['id']."\");' style=\"display:'';\" />";
-						echo $rowquery3['name']."</br>"; 
-					}
-    			}
-    		?>
-    		</div>
-    		
-    		<?php
-    		$listMain = array("5001","5002","5006","5007","5008","5009","5013","5024","5023","5036","5037","5038","5040","5041","5042","5043","5069");
-    		$listKnow = array("5025","5026","5030","5032");
-    		$listPers = array("5003","5027","5028","5029","5031","5033","5034","5035","5039");
-    		$listOths = array("5004","5005","5010","5054","5055","5056","5057","5058","5059","5060","5061","5062","5063","5064","5065","5066","5067","5068");
-    		
-    		?>
-			
-			<div id="menu">
-				<div id = "menu1">
-					<div class="title">Main skills required</div>
-					<div id="list1" class="body_menu">
-					</div>
-				</div>
-				
-				<div id = "menu2">
-					<div class="title">Knowledge</div>
-					<div id="list2" class="body_menu">
-					</div>
-				</div>
-				
-				<div id = "menu3">
-					<div class="title">Personal Skills</div>
-					<div id="list3" class="body_menu">
-					</div>
-				</div>
-				
-				<div id = "menu4">
-					<div class="title">Other Information</div>
-					<div id="list4" class="body_menu">
-					</div>
+			<div id=main_content>
+			</div>
+			<div id=menu>
+
+				<div class="title">Main skills required</div>
+				<div id="list1" class="body_menu">
 				</div>
 
-			</div>
-			<div id="main_content">
-		
-    		
+				<div class="title">Knowledge</div>
+				<div id="list2" class="body_menu">
+				
+				</div>
+				<div class="title">Personal Skills</div>
+				<div id="list3" class="body_menu">
+	
+				</div>
+				<div class="title">Other Information</div>
+				<div id="list4" class="body_menu">
+				
+				</div>
 					<script type="text/javascript">
 			
-						//hazlista();
+						hazlista();
 				
 					</script>
-			
-			
 			</div>
 
-
 		</div>
-		</div>
-		<div id="footer">
+			<div id="footer">
 			<div id=options>
 				<a href="">Contact us</a> <a href="">Help</a>
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript" src="media/javascript/jquery.js"></script>
-	<script type="text/javascript" src="media/javascript/jquerydocument.js"></script>
 </body>
-
 </html>
