@@ -1,5 +1,5 @@
 //Global Var's!
-
+ 
 var listMain = ["5001","5002","5006","5007","5008","5009","5013","5024","5023","5036","5037","5038","5040","5041","5042","5043","5069"];
 var listKnow = ["5025","5026","5030","5032"];
 var listPers = ["5003","5027","5028","5029","5031","5033","5034","5035","5039"];
@@ -7,17 +7,17 @@ var listOths = ["5004","5005","5010","5054","5055","5056","5057","5058","5059","
 
 var flag = false;
 
-window.onload = function fistpresentation (){
-	var list1 = document.getElementById("list1");
-	var elemlist1= list1.getElementsByTagName("div");
-	var elementopen=elemlist1[0].id;
-	var cadena=(elementopen[elementopen.length-2])+(elementopen[elementopen.length-1]);
-	if (cadena[0]==0)
-		show(cadena[1]);
-	else
-		show(cadena);
-	flag=true;
-}
+//window.onload = function fistpresentation (){
+//	var list1 = document.getElementById("list1");
+//	var elemlist1= list1.getElementsByTagName("div");
+//	var elementopen=elemlist1[0].id;
+//	var cadena=(elementopen[elementopen.length-2])+(elementopen[elementopen.length-1]);
+//	if (cadena[0]==0)
+//		show(cadena[1]);
+//	else
+//		show(cadena);
+//	flag=true;
+//}
 
 
 function show (element){
@@ -271,5 +271,11 @@ function drawChartTrends() {
     var chart = new google.visualization.AreaChart(document.getElementById('chart'));
     chart.draw(data, options);    
   }
+
+//=========================================
+//Jquery
+//=========================================
+
+//control de eventos  
 
 

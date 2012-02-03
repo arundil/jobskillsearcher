@@ -1,8 +1,8 @@
 @CHARSET "UTF-8";
  
-/*      div{
+       div{
 	border-style: solid;
-}  */       
+}          
 
 body{
 	background-color: #E6E6E6;
@@ -67,14 +67,40 @@ body{
 	padding: 10px;
 }
 
-#menu{
-	width: 250px;
+/* #menu1{
+	float: left;
+	width:24%;
+	left:1%;
+	border: solid 1px #999;
+	
+}
+#menu2{
+	float: left;
+	width:24%;
+	left:26%;
+	border: solid 1px #999;
+}
+#menu3{
+	float: left;
+	width:24%;
+	left:51%;
+	border: solid 1px #999;
+}
+#menu4{
+	float: left;
+	width:24%;
+	left:76%;
+	border: solid 1px #999;
 }
 
+#menu{
+	margin-top: 50px;
+	padding-left: 30px;
+	
+} */
+
 #main_content{
-	height: 300px;
-	width: 675px;
-	float: right;
+	margin-top: 30px;
 }
 
 #main_content_error{
@@ -111,6 +137,7 @@ body{
 	padding: 5px;
 	margin-bottom: 15px;
 	font-size:smaller;
+	
 }
 
 a:visited {
