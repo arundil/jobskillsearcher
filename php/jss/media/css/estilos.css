@@ -1,8 +1,8 @@
 @CHARSET "UTF-8";
  
-  /*     div{
+/*      li{
 	border-style: solid;
-}          */
+} */          
 
 body{
 	background-color: #E6E6E6;
@@ -42,12 +42,22 @@ body{
 }
 
 #boxsearch{
-	margin-top: 20px;
-	border: solid;
-	padding-left:10px;
-	background-color:white;
+	
+	padding:10px;
+	background-image: url("../img/bar.gif");
+	color: white;
 }
 
+#boxsearch #word {
+	font-size: xx-large;
+	font-weight: bold;
+}
+
+#boxsearch #number {
+	float:right;
+	text-align:right;
+	font-weight: bold;
+}
 .nofloat{
 	clear: both;
 }
@@ -207,47 +217,123 @@ a:LINK {
 
 /*Lavalamp*/
 
-        .lavaLampWithImage {
-            position: relative;
-            height: 29px;
-            width: 995px;
-            background: url("../img/bar.gif") no-repeat top;
-            padding: 15px;
-            margin: 10px 0;
-            overflow: hidden;
-        }
-                .lavaLampWithImage li {
-                    float: left;
-                    list-style: none;
-                }
-                    .lavaLampWithImage li.back {
-                        background: url("../img/lava.gif") no-repeat right -30px;
-                        width: 9px; height: 30px;
-                        z-index: 8;
-                        position: absolute;
-                    }
-                        .lavaLampWithImage li.back .left {
-                            background: url("../img/lava.gif") no-repeat top left;
-                            height: 30px;
-                            margin-right: 9px; /* 7px is the width of the rounded shape */
-                        }
-                    .lavaLampWithImage li a {
-                        font: bold 14px arial;
-                        text-decoration: none;
-                        color: #fff;
-                        outline: none;
-                        text-align: center;
-                        top: 7px;
-                        text-transform: uppercase;
-                        letter-spacing: 0;
-                        z-index: 10;
-                        display: block;
-                        float: left;
-                        height: 30px;
-                        position: relative;
-                        overflow: hidden;
-                        margin: auto 10px;    
-                    }
-                        .lavaLampWithImage li a:hover, .lavaLampWithImage li a:active, .lavaLampWithImage li a:visited {
-                            border: none;
-                        }
+#catnav {
+    clear: both;
+    height: 44px;
+    margin: 20px 0 0;
+    padding: 0;
+    width: 100%;
+}
+
+#nav {
+    list-style: none outside none;
+    margin-top: 24px;
+    overflow: visible;
+    padding-left: 8px;
+}
+
+#nav ul {
+    margin: 0;
+    padding: 0;
+}
+
+#nav li {
+    float: left;
+    list-style: none outside none;
+    margin-right: 86px;
+}
+
+
+#nav li a:hover {
+    color: #FFFFFF;
+    display: block;
+    text-decoration: none;
+}
+
+#nav li ul {
+    background-color: #333333;
+    left: -999em;
+    list-style: none outside none;
+    position: absolute;
+    width: 150px;
+}
+
+#nav li:hover ul, #nav li.sfhover ul {
+    left: auto;
+}
+
+#nav li li {
+    left: auto;
+    margin: 0;
+    padding: 0;
+    width: 150px;
+}
+
+#nav li li a {
+    background-color: #0D1614;
+    border: 1px solid #13222C;
+    color: #FFFFFF;
+    height: 24px;
+    line-height: 24px;
+    margin: 0;
+    padding: 5px 20px 5px 15px;
+    width: 150px;
+}
+
+#nav li li a:hover {
+    background-color: #000000;
+    border-top: 1px solid #131F27;
+    padding: 5px 20px 5px 15px;
+}
+
+#nav li:hover, #nav li.sfhover {
+    position: static;
+}
+
+.lavaLampWithImage {
+	background: url("../img/bar.gif") no-repeat top;
+    height: 29px;
+    overflow: hidden;
+    padding: 15px;
+    position: relative;
+    margin: 10px 0;
+}
+
+
+#nav li.back {
+     background: url("../img/lava.gif") no-repeat right -30px;
+     width: 9px; height: 30px;
+     z-index: 8;
+     position: absolute;
+}
+
+#nav li.back .left {
+     background: url("../img/lava.gif") no-repeat top left;
+     height: 30px;
+     margin-right: 9px; /* 7px is the width of the rounded shape */
+}
+
+.lavaLampWithImage li a {
+    color: #FFFFFF;
+    display: block;
+    font: bold 14px arial;
+    height: 30px;
+    letter-spacing: 0;
+    margin: auto 10px;
+    margin-top: 7px;
+    outline: medium none;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    z-index: 10;
+}
+
+#toprss {
+    display: inline;
+    float: right;
+    line-height: 41px;
+    margin: 10px 15px 0 0;
+    width: 65px;
+}
