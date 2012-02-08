@@ -7,13 +7,12 @@
 <link media="screen" rel="stylesheet" type="text/css" href="media/css/estilos.css">
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script language="JavaScript" src="media/javascript/jstemplate1.js" type="text/javascript"></script>
-<script type="text/javascript" src="media/javascript/jquery.js"></script>
 <script language="JavaScript" src="media/javascript/jquery-1.2.3.min.js" type="text/javascript"></script>
 <script language="JavaScript" src="media/javascript/jquery.easing.min.js" type="text/javascript"></script>
 <script language="JavaScript" src="media/javascript/jquery.lavalamp.min.js" type="text/javascript"></script>
     <script type="text/javascript">
         $(function() {
-            $("#1, #2, #3").lavaLamp({
+            $("#nav").lavaLamp({
                 fx: "backout",
                 speed: 700,
                 click: function(event, menuItem) {
@@ -187,7 +186,7 @@
 				<?php
 				
 				 if (!$error)
-				 	echo "<h3>".$row['word']." :</h3><h5>This word appears in (??) advertisements</h5>"; 
+				 	echo "<div id='number'>This word appears in (??) advertisements</div><div id='word'>".$row['word']." </div>"; 
 				 else
 				 	echo "<h2>No results found :</h2>" 
 				 
@@ -212,14 +211,32 @@
 		</div>
 		
 		<br>
-		<ul class="lavaLampWithImage" id="1">
-    		<li class="current"><a href="#">Main skills required</a></li>
+		<div id="contnav">
+		<ul class="lavaLampWithImage" id="nav">
+    		<li class="current"><a href="#">Main skills required</a>
+    		<ul class="children">
+            <li ><a href="#">3.1 jQuery</a></li>
+            <li ><a href="#">3.2 Mootools</a></li>
+            <li ><a href="#">3.3 Prototype</a></li>
+      		</ul>
+      		</li>
     		<li><a href="#">Knowledge</a></li>
     		<li><a href="#">Personal Skills</a></li>
     		<li><a href="#">Other Information</a></li>
+    		
+			</li>
 		</ul>
+		</div>
 
-<br><br><br>
+
+
+<br>
+
+
+<br><br>
+
+
+
 		<div id="content">		
 			
 		  <div id="datahidden" style="display:NONE">
