@@ -33,7 +33,6 @@ body{
 #logo{
 	float: left;
 	
-
 }
 
 #searcher{
@@ -81,37 +80,6 @@ body{
 	padding: 10px;
 }
 
-#menu1{
-	float: left;
-	width:25%;
-	left:1%;
-	border: solid 1px #999;
-	
-}
-#menu2{
-	float: left;
-	width:25%;
-	left:26%;
-	border: solid 1px #999;
-}
-#menu3{
-	float: left;
-	width:25%;
-	left:51%;
-	border: solid 1px #999;
-}
-#menu4{
-	float: left;
-	width:24%;
-	left:76%;
-	border: solid 1px #999;
-}
-
-#menu{
-	margin-top: 20px;
-	
-	
-} 
 
 #main_content{
 	background-color:white;
@@ -227,7 +195,7 @@ a:LINK {
 
 #nav {
     list-style: none outside none;
-    margin-top: 24px;
+    margin-top: 20px;
     overflow: visible;
     padding-left: 8px;
 }
@@ -256,6 +224,7 @@ a:LINK {
     list-style: none outside none;
     position: absolute;
     width: 150px;
+    margin-top: -4px;
 }
 
 #nav li:hover ul, #nav li.sfhover ul {
@@ -328,12 +297,4 @@ a:LINK {
     text-decoration: none;
     text-transform: uppercase;
     z-index: 10;
-}
-
-#toprss {
-    display: inline;
-    float: right;
-    line-height: 41px;
-    margin: 10px 15px 0 0;
-    width: 65px;
 }
