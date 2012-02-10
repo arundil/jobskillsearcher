@@ -22,8 +22,49 @@
             });
         });
     </script>
+<script type="text/javascript">
+function ajaxFunction() {
+  var xmlHttp;
+  
+  try {
+   
+    xmlHttp=new XMLHttpRequest();
+    return xmlHttp;
+  } catch (e) {
+    
+    try {
+      xmlHttp=new ActiveXObject("Msxml2.XMLHTTP");
+      return xmlHttp;
+    } catch (e) {
+      
+	  try {
+        xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
+        return xmlHttp;
+      } catch (e) {
+        alert("Tu navegador no soporta AJAX!");
+        return false;
+      }}}
+}
 
+function sendData(_page,capa) {
+    var ajax;
+    ajax = ajaxFunction();
+    ajax.open("POST", _pagina, true);
+    ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
+    ajax.onreadystatechange = function() {
+		if (ajax.readyState==1){
+			document.getElementById(capa).innerHTML = " Wait,pelase ...";
+			     }
+		if (ajax.readyState == 4) {
+		   
+                document.getElementById(capa).innerHTML=ajax.responseText; 
+		     }}
+			 
+	ajax.send(null);
+} 
+
+</script>
 
 
 </head>
@@ -150,44 +191,44 @@ if ($totEmp> 0) {
 		if (in_array($rowEmp['type'],$listMain)){
 			if (array_key_exists($rowEmp['type'],$list1)){
 				$aux=$list1[$rowEmp['type']];
-				array_push($aux,$rowEmp['word']);
+				array_push($aux,$rowEmp['word']." (".$rowEmp['lkm']." results)");
 				$list1[$rowEmp['type']]=$aux;
 			}
 			else {
-				$aux = array($rowEmp['word']);
+				$aux = array($rowEmp['word']." (".$rowEmp['lkm']." results)");
 				$list1[$rowEmp['type']]=$aux;
 			}
 		}
 		if (in_array($rowEmp['type'],$listKnow)){
 			if (array_key_exists($rowEmp['type'],$list2)){
 				$aux=$list2[$rowEmp['type']];
-				array_push($aux,$rowEmp['word']);
+				array_push($aux,$rowEmp['word']." (".$rowEmp['lkm']." results)");
 				$list2[$rowEmp['type']]=$aux;
 			}
 			else {
-				$aux = array($rowEmp['word']);
+				$aux = array($rowEmp['word']." (".$rowEmp['lkm']." results)");
 				$list2[$rowEmp['type']]=$aux;
 			}
 		}
 		if (in_array($rowEmp['type'],$listPers)){
 			if (array_key_exists($rowEmp['type'],$list3)){
 				$aux=$list3[$rowEmp['type']];
-				array_push($aux,$rowEmp['word']);
+				array_push($aux,$rowEmp['word']." (".$rowEmp['lkm']." results)");
 				$list3[$rowEmp['type']]=$aux;
 			}
 			else {
-				$aux = array($rowEmp['word']);
+				$aux = array($rowEmp['word']." (".$rowEmp['lkm']." results)");
 				$list3[$rowEmp['type']]=$aux;
 			}
 		}
 		if (in_array($rowEmp['type'],$listOths)){
 			if (array_key_exists($rowEmp['type'],$list4)){
 				$aux=$list4[$rowEmp['type']];
-				array_push($aux,$rowEmp['word']);
+				array_push($aux,$rowEmp['word']." (".$rowEmp['lkm']." results)");
 				$list4[$rowEmp['type']]=$aux;
 			}
 			else {
-				$aux = array($rowEmp['word']);
+				$aux = array($rowEmp['word']." (".$rowEmp['lkm']." results)");
 				$list4[$rowEmp['type']]=$aux;
 			}
 		}
@@ -239,7 +280,7 @@ if ($totEmp> 0) {
 					for ($i=0; $i<count($keys1); $i ++){
 						$cad = substr($keys1[$i],2,3);
 						$elem = $listcodes[intval($cad)];	
-						echo "<li><a href= '#'>".utf8_decode($elem)."</a></li>";
+						echo "<li><a href=\"#\" onclick=\"show('".utf8_decode($elem)."');\">".utf8_decode($elem)."</a></li>";
 					}
 					?>
           
@@ -252,7 +293,7 @@ if ($totEmp> 0) {
 					for ($i=0; $i<count($keys2); $i ++){
 						$cad = substr($keys2[$i],2,3);
 						$elem = $listcodes[intval($cad)];
-						echo "<li><a href= '#'>".$elem."</a></li>";
+						echo "<li><a href=\"#\" onclick=\"show('".utf8_decode($elem)."');\">".utf8_decode($elem)."</a></li>";
 					}
 					?>
 					</ul>
@@ -264,7 +305,7 @@ if ($totEmp> 0) {
 					for ($i=0; $i<count($keys3); $i ++){
 						$cad = substr($keys3[$i],2,3);
 						$elem = $listcodes[intval($cad)];	
-						echo "<li><a href='#'>".$elem."</a></li>";
+						echo "<li><a href=\"#\" onclick=\"show('".utf8_decode($elem)."');\">".utf8_decode($elem)."</a></li>";
 					}
 					?>
 					</ul>
@@ -276,7 +317,7 @@ if ($totEmp> 0) {
 					for ($i=0; $i<count($keys4); $i ++){
 						$cad = substr($keys4[$i],2,3);
 						$elem = $listcodes[intval($cad)];	
-						echo "<li><a href='#'>".$elem."</a></li>";
+						echo "<li><a href=\"#\" onclick=\"show('".utf8_decode($elem)."');\">".utf8_decode($elem)."</a></li>";
 					}
 					?>
     		
@@ -286,9 +327,47 @@ if ($totEmp> 0) {
 		</div>
 
 		<div id="content">		
-		 		
-			<div id="main_content">
-
+		 		<div id="chart_div"></div>
+		 <div id="main_content">
+			<?php
+			
+			for ($i=0; $i<count($list1); $i++){
+				$cad = substr($keys1[$i],2,3);
+				echo "<div id='".$listcodes[intval($cad)]."' style= display:none><u>".$listcodes[intval($cad)]."</u></br>";
+				for ($j=0; $j<count($list1[$keys1[$i]]);$j++){
+					echo $list1[$keys1[$i]][$j]."</br>";
+				}
+				echo "</br></div>";
+			}
+			
+				for ($i=0; $i<count($list2); $i++){
+				$cad = substr($keys2[$i],2,3);
+				echo "<div id='".$listcodes[intval($cad)]."'style= display:none><u>".$listcodes[intval($cad)]."</u></br>";
+				for ($j=0; $j<count($list2[$keys2[$i]]);$j++){
+					echo $list2[$keys2[$i]][$j]."</br>";
+				}
+				echo "</br></div>";
+			}
+			
+				for ($i=0; $i<count($list3); $i++){
+				$cad = substr($keys3[$i],2,3);
+				echo "<div id='".$listcodes[intval($cad)]."'style= display:none><u>".$listcodes[intval($cad)]."</u></br>";
+				for ($j=0; $j<count($list3[$keys3[$i]]);$j++){
+					echo $list3[$keys3[$i]][$j]."</br>";
+				}
+				echo "</br></div>";
+			}
+			
+				for ($i=0; $i<count($list4); $i++){
+				$cad = substr($keys4[$i],2,3);
+				echo "<div id='".$listcodes[intval($cad)]."'style= display:none><u>".$listcodes[intval($cad)]."</u></br>";
+				for ($j=0; $j<count($list4[$keys4[$i]]);$j++){
+					echo $list4[$keys4[$i]][$j]."</br>";
+				}
+				echo "</br></div>";
+			}
+			
+			?>
 			
 			</div>
 
