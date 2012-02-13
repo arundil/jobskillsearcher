@@ -7,17 +7,13 @@ var listOths = ["5004","5005","5010","5054","5055","5056","5057","5058","5059","
 
 var flag = null;
 
-//window.onload = function fistpresentation (){
-//	var list1 = document.getElementById("list1");
-//	var elemlist1= list1.getElementsByTagName("div");
-//	var elementopen=elemlist1[0].id;
-//	var cadena=(elementopen[elementopen.length-2])+(elementopen[elementopen.length-1]);
-//	if (cadena[0]==0)
-//		show(cadena[1]);
-//	else
-//		show(cadena);
-//	flag=true;
-//}
+window.onload = function fistpresentation (){
+	var list1 = document.getElementById("minimenu");
+	var elemlist1= list1.getElementsByTagName("div");
+	var elementopen=elemlist1[0].id;
+	show(elementopen);
+	flag=elementopen;
+}
 
 function show (element){
 	if (flag!=null){
@@ -31,13 +27,24 @@ function show (element){
 		//google.setOnLoadCallback(drawChart(chart_div.id));
 	
 	flag=element;
-	google.setOnLoadCallback(drawChart());
+	google.setOnLoadCallback(drawChart(element));
 }
 
 function remove (element){
 	var div = document.getElementById(element);	
 	div.style.display= "none";
 	flag=null;
+}
+
+function redirect(chain){
+	var i=0;
+	var url="";
+	for (i=0; i<=chain.length-1; i++){
+		if (chain[i]==" ")
+			break;
+		url= url+chain[i];
+	}
+	return url;
 }
 
 function contains (list, element){
@@ -88,106 +95,43 @@ function getTypeById (identy) {
 	return res;
 }
 
-//function hazlista(){
-//	var div = document.getElementById("datahidden");
-//	var arraylist= new Array();
-//	var divtofill1 = document.getElementById("list1");
-//	var divtofill2 = document.getElementById("list2");
-//	var divtofill3 = document.getElementById("list3");
-//	var divtofill4 = document.getElementById("list4");
-//	var words = div.getElementsByTagName("div");
-//	var index;
-//	var cadena="";
-//	
-//	
-//	
-//	//alert(cadena);
-//	
-//	for (index=0; index<=words.length-1; index++){
-//		if (contains(arraylist, words[index].id)){
-//			var olddiv;
-//			
-//			if (contains(listMain, words[index].id)){
-//				olddiv = document.getElementById("type"+words[index].id);
-//				olddiv.appendChild(words[index]);
-//				divtofill1.appendChild(olddiv);
-//			}else if (contains(listKnow, words[index].id)){
-//				olddiv = document.getElementById("type"+words[index].id);
-//				olddiv.appendChild(words[index]);
-//				divtofill2.appendChild(olddiv);
-//			}else if (contains(listPers, words[index].id)){
-//				olddiv = document.getElementById("type"+words[index].id);
-//				olddiv.appendChild(words[index]);
-//				divtofill3.appendChild(olddiv);
-//			}else if (contains(listOths, words[index].id)){
-//				olddiv = document.getElementById("type"+words[index].id);
-//				olddiv.appendChild(words[index]);
-//				divtofill4.appendChild(olddiv);
-//			}
-//		}
-//		else{
-//			if (!arraylist[0])
-//				arraylist[0]=words[index].id;
-//			else
-//				arraylist[arraylist.length]=words[index].id;
-//			
-//			var temp = words[index];
-//			
-////			alert("NEW TEMP : "+temp.id);
-//			var newdiv= getTypeById(temp.id);
-//			
-//			if (contains(listMain, temp.id)){
-//				newdiv.id = "type"+temp.id;
-//				newdiv.appendChild(temp);
-//				divtofill1.appendChild(newdiv);
-//			}else if (contains(listKnow, temp.id)){
-//				newdiv.id = "type"+temp.id;
-//				newdiv.appendChild(temp);
-//				divtofill2.appendChild(newdiv);
-//			}else if (contains(listPers, temp.id)){
-//				newdiv.id = "type"+temp.id;
-//				newdiv.appendChild(temp);
-//				divtofill3.appendChild(newdiv);
-//			}else if (contains(listOths, temp.id)){
-//				newdiv.id = "type"+temp.id;
-//				newdiv.appendChild(temp);
-//				divtofill4.appendChild(newdiv);
-//			}
-//			//alert("Vista de Array List: "+arraylist);
-//		}
-//
-//	}
-//}
+
 //Api google
 
 google.load('visualization', '1.0', {'packages':['corechart']});
 
 
-function drawChart() {
+function drawChart(element) {
 
     // Create the data table.
     var data = new google.visualization.DataTable();
-    
+    var getdiv = document.getElementById(element);
+    var getdivs= getdiv.getElementsByTagName("div");
     var k=0;
     
     data.addColumn('string', 'Word');
-    data.addColumn('number', 'Nº of times this word is mentioned in the advs. which contains the word searched');
+    data.addColumn('number', 'N. of times this word is mentioned in the advs. which contains the word searched');
     
    var array= [];
-   array [0]=["papa",5];
-   /*var labels;
-   for (k=0; k<=dataincad.length-1; k++){
-		labels= dataincad[k].getElementsByTagName('LABEL');
-	   	array[array.length]=[dataincad[k].firstChild.firstChild.textContent,parseInt(labels[0].textContent)];
-   }*/
+   
+   var labels;
+   var endbucle=9;
+   if (getdivs.length-1 <10)
+	   endbucle = getdivs.length-1
+   
+   for (k=1; k<=endbucle; k++){
+		labels= getdivs[k].getElementsByTagName('LABEL');
+	   	array[array.length]=[getdivs[k].firstChild.firstChild.textContent,parseInt(labels[0].textContent)];
+   }
    data.addRows(array);
 
 
     // Set chart options
-    var options = {'title':"cadena",
-                   'width':600,
-                   'height':400,
-                   'colors':['black']};
+    var options = {title :element,
+                   width :750,
+                   height :500,
+                   chartArea:{left:100,top:20,width:"85%",height:"75%"},
+                   colors :['black']};
 
     // Instantiate and draw our chart, passing in some options.
     var chart = new google.visualization.BarChart(document.getElementById("chart_div"));
@@ -218,7 +162,7 @@ function drawChartTrends() {
     data.addRows(array);
 
     var options = {
-      width: 1000, height: 260,
+      width: 300, height: 260,
       title: 'Trends of this word',
       vAxis: {title: 'Nº Advertisments',  titleTextStyle: {color: 'red'}}
     };

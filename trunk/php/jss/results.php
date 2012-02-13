@@ -72,9 +72,8 @@ function sendData(_page,capa) {
 <body>
 	<div id="container">
 		<div id="header">
-			<div id=logo>
-				<h1> JobSkillSearcher </h1>
-				<h3>Easy way to find skills you need for your future job</h3>
+			<div id="logo">
+				<a href="/jss"> <img src="media/img/title.png"> </a>
 			</div>
 			<div id=searcher>
 				<form action="" method="GET">
@@ -191,44 +190,44 @@ if ($totEmp> 0) {
 		if (in_array($rowEmp['type'],$listMain)){
 			if (array_key_exists($rowEmp['type'],$list1)){
 				$aux=$list1[$rowEmp['type']];
-				array_push($aux,$rowEmp['word']." (".$rowEmp['lkm']." results)");
+				array_push($aux,$rowEmp['word']." (<label>".$rowEmp['lkm']."</label> results)");
 				$list1[$rowEmp['type']]=$aux;
 			}
 			else {
-				$aux = array($rowEmp['word']." (".$rowEmp['lkm']." results)");
+				$aux = array($rowEmp['word']." (<label>".$rowEmp['lkm']."</label> results)");
 				$list1[$rowEmp['type']]=$aux;
 			}
 		}
 		if (in_array($rowEmp['type'],$listKnow)){
 			if (array_key_exists($rowEmp['type'],$list2)){
 				$aux=$list2[$rowEmp['type']];
-				array_push($aux,$rowEmp['word']." (".$rowEmp['lkm']." results)");
+				array_push($aux,$rowEmp['word']." (<label>".$rowEmp['lkm']."</label>  results)");
 				$list2[$rowEmp['type']]=$aux;
 			}
 			else {
-				$aux = array($rowEmp['word']." (".$rowEmp['lkm']." results)");
+				$aux = array($rowEmp['word']." (<label>".$rowEmp['lkm']."</label>  results)");
 				$list2[$rowEmp['type']]=$aux;
 			}
 		}
 		if (in_array($rowEmp['type'],$listPers)){
 			if (array_key_exists($rowEmp['type'],$list3)){
 				$aux=$list3[$rowEmp['type']];
-				array_push($aux,$rowEmp['word']." (".$rowEmp['lkm']." results)");
+				array_push($aux,$rowEmp['word']." (<label>".$rowEmp['lkm']."</label>  results)");
 				$list3[$rowEmp['type']]=$aux;
 			}
 			else {
-				$aux = array($rowEmp['word']." (".$rowEmp['lkm']." results)");
+				$aux = array($rowEmp['word']." (<label>".$rowEmp['lkm']."</label>  results)");
 				$list3[$rowEmp['type']]=$aux;
 			}
 		}
 		if (in_array($rowEmp['type'],$listOths)){
 			if (array_key_exists($rowEmp['type'],$list4)){
 				$aux=$list4[$rowEmp['type']];
-				array_push($aux,$rowEmp['word']." (".$rowEmp['lkm']." results)");
+				array_push($aux,$rowEmp['word']." (<label>".$rowEmp['lkm']."</label> results)");
 				$list4[$rowEmp['type']]=$aux;
 			}
 			else {
-				$aux = array($rowEmp['word']." (".$rowEmp['lkm']." results)");
+				$aux = array($rowEmp['word']." (<label>".$rowEmp['lkm']."</label>  results)");
 				$list4[$rowEmp['type']]=$aux;
 			}
 		}
@@ -327,42 +326,65 @@ if ($totEmp> 0) {
 		</div>
 
 		<div id="content">		
-		 		<div id="chart_div"></div>
-		 <div id="main_content">
+		 <div id= "main_content">
+			<div id="chart_div"></div>
+		</div>
+		 		
+		 <div id="minimenu">
 			<?php
 			
 			for ($i=0; $i<count($list1); $i++){
 				$cad = substr($keys1[$i],2,3);
-				echo "<div id='".$listcodes[intval($cad)]."' style= display:none><u>".$listcodes[intval($cad)]."</u></br>";
-				for ($j=0; $j<count($list1[$keys1[$i]]);$j++){
-					echo $list1[$keys1[$i]][$j]."</br>";
+				echo "<div id='".$listcodes[intval($cad)]."' class='body_menu' style= display:none><div class='title'>".$listcodes[intval($cad)]."</div></br>";
+				$line = $list1[$keys1[$i]];
+				for ($j=0; $j<count($line);$j++){
+					$pos= strpos($line[$j]," ");
+					$str1=substr($line[$j],0,$pos);
+					$str2= substr($line[$j],$pos+1,strlen($line[$j]));
+					
+					echo "<div ><a href=\"?q=".$str1."\">".$str1."</a> ".$str2."</br></div>";
 				}
-				echo "</br></div>";
+				echo "</div>";
 			}
 			
 				for ($i=0; $i<count($list2); $i++){
 				$cad = substr($keys2[$i],2,3);
-				echo "<div id='".$listcodes[intval($cad)]."'style= display:none><u>".$listcodes[intval($cad)]."</u></br>";
-				for ($j=0; $j<count($list2[$keys2[$i]]);$j++){
-					echo $list2[$keys2[$i]][$j]."</br>";
+				echo "<div id='".$listcodes[intval($cad)]."' class='body_menu' style= display:none><div class='title'>".$listcodes[intval($cad)]."</div></br>";
+				$line = $list2[$keys2[$i]];
+				for ($j=0; $j<count($line);$j++){
+					$pos= strpos($line[$j]," ");
+					$str1=substr($line[$j],0,$pos);
+					$str2= substr($line[$j],$pos+1,strlen($line[$j]));
+					
+					echo "<div ><a href=\"?q=".$str1."\">".$str1."</a> ".$str2."</br></div>";
 				}
 				echo "</br></div>";
 			}
 			
 				for ($i=0; $i<count($list3); $i++){
 				$cad = substr($keys3[$i],2,3);
-				echo "<div id='".$listcodes[intval($cad)]."'style= display:none><u>".$listcodes[intval($cad)]."</u></br>";
-				for ($j=0; $j<count($list3[$keys3[$i]]);$j++){
-					echo $list3[$keys3[$i]][$j]."</br>";
+				echo "<div id='".$listcodes[intval($cad)]."' class='body_menu' style= display:none><div class='title'>".$listcodes[intval($cad)]."</div></br>";
+				$line = $list3[$keys3[$i]];
+				for ($j=0; $j<count($line);$j++){
+					$pos= strpos($line[$j]," ");
+					$str1=substr($line[$j],0,$pos);
+					$str2= substr($line[$j],$pos+1,strlen($line[$j]));
+					
+					echo "<div ><a href=\"?q=".$str1."\">".$str1."</a> ".$str2."</br></div>";
 				}
 				echo "</br></div>";
 			}
 			
 				for ($i=0; $i<count($list4); $i++){
 				$cad = substr($keys4[$i],2,3);
-				echo "<div id='".$listcodes[intval($cad)]."'style= display:none><u>".$listcodes[intval($cad)]."</u></br>";
-				for ($j=0; $j<count($list4[$keys4[$i]]);$j++){
-					echo $list4[$keys4[$i]][$j]."</br>";
+				echo "<div id='".$listcodes[intval($cad)]."' class='body_menu' style= display:none><div class='title'>".$listcodes[intval($cad)]."</div></br>";
+				$line = $list4[$keys4[$i]];
+				for ($j=0; $j<count($line);$j++){
+					$pos= strpos($line[$j]," ");
+					$str1=substr($line[$j],0,$pos);
+					$str2= substr($line[$j],$pos+1,strlen($line[$j]));
+					
+					echo "<div ><a href=\"?q=".$str1."\">".$str1."</a> ".$str2."</br></div>";
 				}
 				echo "</br></div>";
 			}
@@ -370,12 +392,11 @@ if ($totEmp> 0) {
 			?>
 			
 			</div>
-
-
+	
 		</div>  
 		
 		<div id="footer">
-			<div id=options>
+			<div id="options">
 				<a href="">Contact us</a> <a href="">Help</a>
 			</div>
 		</div>
