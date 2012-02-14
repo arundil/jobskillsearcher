@@ -24,8 +24,7 @@ function show (element){
 	var div = document.getElementById(element);	
 	div.style.display='';
 	
-		//google.setOnLoadCallback(drawChart(chart_div.id));
-	
+		
 	flag=element;
 	google.setOnLoadCallback(drawChart(element));
 }
@@ -162,7 +161,7 @@ function drawChartTrends() {
     data.addRows(array);
 
     var options = {
-      width: 300, height: 260,
+      width: 1000, height: 500,
       title: 'Trends of this word',
       vAxis: {title: 'Nº Advertisments',  titleTextStyle: {color: 'red'}}
     };

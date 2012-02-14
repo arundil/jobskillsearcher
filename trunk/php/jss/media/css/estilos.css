@@ -5,7 +5,8 @@
 }  */          
 
 body{
-	background-color: #E6E6E6;
+	/*background-color: #E6E6E6;*/
+	background-image: url("../img/bgweb.png");
 	text-align: center;
 	margin: 0px;
 	padding-top :20px;
@@ -17,7 +18,7 @@ body{
 }
 
 #container{
-	background-color: #E6E6E6;
+	//background-color: #E6E6E6;
 	width: 1024px;
 	text-align: left;
 	margin: auto;
@@ -25,7 +26,7 @@ body{
 
 #content{
     background-color: white;
-    border: solid;
+   
     height: auto;
     padding: 10px;
     
@@ -40,6 +41,28 @@ body{
     height: auto;
     width: 750px;
     padding: 10px;
+}
+
+#maincontent {
+    background-color: white;
+    height: 500px;
+    padding: 10px;
+    margin-bottom: 50px;
+}
+
+#img_error{
+	margin-left: 40px;
+	float: left;
+}
+#main_content_error{
+	margin-top : 50px;
+	width : 500px;
+	float: right;
+}
+
+#mainsearch {
+    margin-top: 200px;
+    text-align: center;
 }
 
 #logo{
@@ -85,7 +108,7 @@ body{
 
 #footer{
 	background-color: white;
-	border: solid;
+	border-top: solid;
 	padding: 10px;
 }
 
@@ -284,3 +307,22 @@ a:LINK {
     text-transform: uppercase;
     z-index: 10;
 }
+
+/*Ajaxmenu*/
+
+.suggest_link {
+		background-color: #FFFFFF;
+		padding: 2px 6px 2px 6px;
+	}
+	.suggest_link_over {
+		background-color: #3366CC;
+		padding: 2px 6px 2px 6px;
+	}
+	#search_suggest {
+		position: absolute; 
+		margin-left: 263px;
+		width: 500px;
+		background-color: #FFFFFF; 
+		text-align: left; 
+		border: 1px solid #000000;			
+	}		

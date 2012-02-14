@@ -3,13 +3,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>--JobSkillSearcher--</title>
-
+<link type="image/x-icon" href="media/img/logoweb.png" rel="shortcut icon"/>
 <link media="screen" rel="stylesheet" type="text/css" href="media/css/estilos.css">
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script language="JavaScript" src="media/javascript/jstemplate1.js" type="text/javascript"></script>
 <script language="JavaScript" src="media/javascript/jquery-1.2.3.min.js" type="text/javascript"></script>
 <script language="JavaScript" src="media/javascript/jquery.easing.min.js" type="text/javascript"></script>
 <script language="JavaScript" src="media/javascript/jquery.lavalamp.min.js" type="text/javascript"></script>
+<script language="JavaScript" src="media/javascript/ajax.js" type="text/javascript"></script>
    
     <script type="text/javascript">
         $(function() {
@@ -73,17 +74,17 @@ function sendData(_page,capa) {
 	<div id="container">
 		<div id="header">
 			<div id="logo">
-				<a href="/jss"> <img src="media/img/title.png"> </a>
+				<a href="/jss"> <img src="media/img/title_beta.png"> </a>
 			</div>
 			<div id=searcher>
 				<form action="" method="GET">
-					<label for="s1">Search!</label> <input type="text" name="q"
-						id="s1" >
+					<label for="s1">Search!</label> <input type="text" name="q" id="txtSearch" autocomplete="on" onkeyup="" on alt="Search Criteria">
 					<button type="submit">GO!</button>
+					<div id="search_suggest" style="display:none" ></div>
 				</form>
 			</div>
 			<div class="nofloat"></div>
-								
+		</div>						
 <?php
 
 header('Content-Type: text/html; charset=iso-8859-1');
@@ -173,7 +174,7 @@ if ($totquery3 >0){
 }
 
 
-//Hacerlista
+//DO liST
 
 $list1 = array();
 $list2 = array();
@@ -235,17 +236,14 @@ if ($totEmp> 0) {
 }
 
 ?>  		
-    		
-    		
-		</div>
-		
+
 		<div id="boxsearch">
 			<div id="search">
 
 				<?php
 				
 				 if (!$error)
-				 	echo "<div id='number'>This word appears in ".$row['count']. " advertisements</div><div id='word'>".$row['word']." </div>"; 
+				 	echo "<div id='number'>This word appears in ".$row['count']. " advertisements</div><div id='word'>".utf8_decode($row['word'])." </div>"; 
 				 else
 				 	echo "<h2>No results found :</h2>" 
 				 
@@ -342,7 +340,7 @@ if ($totEmp> 0) {
 					$str1=substr($line[$j],0,$pos);
 					$str2= substr($line[$j],$pos+1,strlen($line[$j]));
 					
-					echo "<div ><a href=\"?q=".$str1."\">".$str1."</a> ".$str2."</br></div>";
+					echo "<div ><a href=\"?q=".$str1."\">".utf8_decode($str1)."</a> ".$str2."</br></div>";
 				}
 				echo "</div>";
 			}
@@ -356,7 +354,7 @@ if ($totEmp> 0) {
 					$str1=substr($line[$j],0,$pos);
 					$str2= substr($line[$j],$pos+1,strlen($line[$j]));
 					
-					echo "<div ><a href=\"?q=".$str1."\">".$str1."</a> ".$str2."</br></div>";
+					echo "<div ><a href=\"?q=".$str1."\">".utf8_decode($str1)."</a> ".$str2."</br></div>";
 				}
 				echo "</br></div>";
 			}
@@ -370,7 +368,7 @@ if ($totEmp> 0) {
 					$str1=substr($line[$j],0,$pos);
 					$str2= substr($line[$j],$pos+1,strlen($line[$j]));
 					
-					echo "<div ><a href=\"?q=".$str1."\">".$str1."</a> ".$str2."</br></div>";
+					echo "<div ><a href=\"?q=".$str1."\">".utf8_decode($str1)."</a> ".$str2."</br></div>";
 				}
 				echo "</br></div>";
 			}
@@ -384,7 +382,7 @@ if ($totEmp> 0) {
 					$str1=substr($line[$j],0,$pos);
 					$str2= substr($line[$j],$pos+1,strlen($line[$j]));
 					
-					echo "<div ><a href=\"?q=".$str1."\">".$str1."</a> ".$str2."</br></div>";
+					echo "<div ><a href=\"?q=".$str1."\">".utf8_decode($str1)."</a> ".$str2."</br></div>";
 				}
 				echo "</br></div>";
 			}
@@ -397,14 +395,12 @@ if ($totEmp> 0) {
 		
 		<div id="footer">
 			<div id="options">
-				<a href="">Contact us</a> <a href="">Help</a>
+				This is the footer of the web page
 			</div>
 		</div>
 	</div>
 	
 	<script type="text/javascript" src="media/javascript/jquerydocument.js"></script>
-
-
 
 </body>
 
