@@ -46,53 +46,7 @@ function redirect(chain){
 	return url;
 }
 
-function contains (list, element){
-	var i = 0;
-	var contains = false;
-	for (i=0; i<=list.length-1; i++){
-		//alert(list[i]+" , "+element);
-		if (list[i]==element){
-			contains=true;
-			break;
-		}
-	}
-	//alert("Fin lista")
-	//alert("la lista es: "+list+"\nEl elemento es: "+element+"\n Está contenido?"+contains);
-	return contains;
-}
 
-function findElement (list, element) {
-	var i = 0;
-	var contains = null;
-	for (i=0; i<=list.length; i++){
-		if (list[i]==element){
-			contains=list[i];
-			break;
-		}
-	}
-	return contains;
-}
-
-function getTypeById (identy) {
-	var div2 = document.getElementById("datahiddentype");
-	var divtype= div2.getElementsByTagName("div");
-	var i=0;
-	var type= "";
-	var res;
-	var cadena=(identy[identy.length-2])+(identy[identy.length-1]);
-	if (cadena[0]==0)
-		chain= cadena[1];
-	else
-		chain = cadena;
-	for (i=0; i<=divtype.length-1; i++){
-		
-		if (divtype[i].id == chain ){
-			res = divtype[i];
-			break;
-		}
-	}
-	return res;
-}
 
 
 //Api google
@@ -129,8 +83,10 @@ function drawChart(element) {
     var options = {title :element,
                    width :750,
                    height :500,
-                   chartArea:{left:100,top:20,width:"85%",height:"75%"},
-                   colors :['black']};
+                   chartArea:{left:100,top:20,width:"80%",height:"75%"},
+                   colors :['black'],
+                   legend: 'none'
+                };
 
     // Instantiate and draw our chart, passing in some options.
     var chart = new google.visualization.BarChart(document.getElementById("chart_div"));
@@ -138,37 +94,7 @@ function drawChart(element) {
   
 }
 
-google.load("visualization", "1", {packages:["corechart"]});
 
-google.setOnLoadCallback(drawChartTrends);
-
-function drawChartTrends() {
-    var data = new google.visualization.DataTable();
-    var div = document.getElementById ("hiddendata");
-    var contentdiv = div.getElementsByTagName('div');
-    
-    data.addColumn('string', 'days');
-    data.addColumn('number', 'Nº advs. per day');
-    
-    var array= [];
-    
-    for (k=0; k<=contentdiv.length-1; k++){
-		var auxdate= contentdiv[k].id;
-		var auxnumber= contentdiv[k].title;
-	   	array[array.length]=[auxdate,parseInt(auxnumber)];
-   }
-    
-    data.addRows(array);
-
-    var options = {
-      width: 1000, height: 500,
-      title: 'Trends of this word',
-      vAxis: {title: 'Nº Advertisments',  titleTextStyle: {color: 'red'}}
-    };
-
-    var chart = new google.visualization.AreaChart(document.getElementById('chart'));
-    chart.draw(data, options);    
-  }
 
 //=========================================
 //Jquery
