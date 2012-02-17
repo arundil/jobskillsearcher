@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link type="image/x-icon" href="media/img/logoweb.png" rel="shortcut icon"/>
+<link type="image/x-icon" href="media/img/logoweb.png" rel="shortcut icon">
 <link rel="stylesheet" type="text/css" href="media/css/estilos.css">
 <script language="JavaScript" src="media/javascript/ajax.js" type="text/javascript"></script>
 
@@ -45,7 +45,7 @@ function facultyStatusChanged()
 	<div id="container">
 		<div id="header">
 			<div id="logo">
-				<a href="/jss"> <img src="media/img/title_beta.png"> </a>
+				<a href="/jss"> <img src="media/img/title_beta.png" alt="Logo"> </a>
 			</div>
 			<div class="nofloat"></div>
 		</div>
@@ -54,9 +54,9 @@ function facultyStatusChanged()
 		
 		<form action="results.php" method="GET">
 			<div id="mainsearch">
-				<label for="consulta" style="font-size: 20px">Search!</label> 
-				<input type="text" name='q' id="txtSearch" autocomplete="off" onkeyup="searchSuggest();" on alt="Search Criteria" style="width: 500px; height: 30px; font-size: 20px" />
-				<input type="submit" value="Go!" style="height: 35px" />
+				<label for="txtSearch" style="font-size: 20px">Search!</label> 
+				<input type="text" name='q' id="txtSearch" autocomplete="off" onkeyup="searchSuggest();" alt="Search Criteria" style="width: 500px; height: 30px; font-size: 20px">
+				<input type="submit" value="Go!" style="height: 35px" >
 					<div id="search_suggest" style="display:none" ></div>
 			</div>
 		</form>
