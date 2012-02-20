@@ -9,6 +9,7 @@
 <script language="JavaScript" src="media/javascript/jquery-1.2.3.min.js" type="text/javascript"></script>
 <script language="JavaScript" src="media/javascript/jquery.easing.min.js" type="text/javascript"></script>
 <script language="JavaScript" src="media/javascript/jquery.lavalamp.min.js" type="text/javascript"></script>
+<script language="JavaScript" src="media/javascript/jquery.blockUI.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="media/css/estilos.css">
 <?php
 
@@ -100,7 +101,7 @@ function semanaISO($fecha){
 				<form action="" method="GET">
 					<label for="s1">Search!</label> <input type="text" name="q"
 						id="s1" >
-					<button type="submit">GO!</button>
+					<button id="go" type="submit">GO!</button>
 				</form>
 			</div>
 			<div class="nofloat"></div>
@@ -153,14 +154,14 @@ function semanaISO($fecha){
 		
 		<div id="tabs">
 			<ul>
-				<li>
-					<?php echo "<a href= 'results.php?q=".$search."'><span>Look word results<span/></a>";?>
+				<li >
+					<?php echo "<a href= 'results.php?q=".$search."' id='tab1'><span>Look word results<span/></a>";?>
 					
 					</a>
 				</li>
-				<li>
+				<li id="tab2">
 					<a title="Link 2" href="#">
-					<?php echo "<a href= 'trends.php?q=".$search."'><span>Look word trend<span/></a>";?>
+					<?php echo "<a href= 'trends.php?q=".$search."' id='tab2'><span>Look word trend<span/></a>";?>
 					</a>
 				</li>
 			</ul>
@@ -175,6 +176,8 @@ function semanaISO($fecha){
     			<li><a href="#" onclick="google.setOnLoadCallback(drawChartTrends('<?echo $row2['word']?>',30));actual=30;"> Last 30 days </a></li>
     			<li><a href="#" onclick="google.setOnLoadCallback(drawChartTrends('<?echo $row2['word']?>',90));actual=90;"> Last 3 months </a></li>
     			<li><a href="#" onclick="google.setOnLoadCallback(drawChartTrends('<?echo $row2['word']?>',180));actual=180;">Last 6 months </a></li>
+    			<li><a href="#" onclick="google.setOnLoadCallback(drawChartTrends('<?echo $row2['word']?>',365));actual=180;">1 year </a></li>
+    			<li><a href="#" onclick="google.setOnLoadCallback(drawChartTrends('<?echo $row2['word']?>',730));actual=180;">2 years </a></li>
     		</ul>
     		</li>
     		
@@ -242,6 +245,9 @@ function semanaISO($fecha){
 			</div>
 		</div>
 	</div>
+	<div id= "menssage" style="display: none;" >
+		<h2><img src="media/img/101-5.gif" /> Searching...<h2>
+	</div>
 	<script type="text/javascript" src="media/javascript/jquerydocument.js"></script>
-</body>
+	</body>
 </html>

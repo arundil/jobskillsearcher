@@ -11,6 +11,7 @@
 <script language="JavaScript" src="media/javascript/jquery.easing.min.js" type="text/javascript"></script>
 <script language="JavaScript" src="media/javascript/jquery.lavalamp.min.js" type="text/javascript"></script>
 <script language="JavaScript" src="media/javascript/ajax.js" type="text/javascript"></script>
+<script language="JavaScript" src="media/javascript/jquery.blockUI.js" type="text/javascript"></script>
    
     <script type="text/javascript">
         $(function() {
@@ -79,7 +80,7 @@ function sendData(_page,capa) {
 			<div id=searcher>
 				<form action="" method="GET">
 					<label for="s1">Search!</label> <input type="text" name="q" id="txtSearch" autocomplete="on" onkeyup="" on alt="Search Criteria">
-					<button type="submit">GO!</button>
+					<button id="go"type="submit">GO!</button>
 					<div id="search_suggest" style="display:none" ></div>
 				</form>
 			</div>
@@ -255,13 +256,13 @@ if ($totEmp> 0) {
 		<div id="tabs">
 			<ul>
 				<li>
-					<?php echo "<a href= 'results.php?q=".$search."'><span>Look word results<span/></a>";?>
+					<?php echo "<a href= 'results.php?q=".$search."' id='tab1'><span>Look word results<span/></a>";?>
 					
 					</a>
 				</li>
 				<li>
 					<a title="Link 2" href="#">
-					<?php echo "<a href= 'trends.php?q=".$search."'><span>Look word trend<span/></a>";?>
+					<?php echo "<a href= 'trends.php?q=".$search."' id='tab2'><span>Look word trend<span/></a>";?>
 					</a>
 				</li>
 			</ul>
@@ -401,7 +402,10 @@ if ($totEmp> 0) {
 	</div>
 	
 	<script type="text/javascript" src="media/javascript/jquerydocument.js"></script>
-
+	
+	<div id= "menssage" style="display: none;" >
+		<h2><img src="media/img/101-5.gif" /> Searching...<h2>
+	</div>
 </body>
 
 </html>
