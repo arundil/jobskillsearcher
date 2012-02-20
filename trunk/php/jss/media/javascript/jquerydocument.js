@@ -54,3 +54,58 @@ $(" #nav li").hover(function(){
  $(document).ready(function(){					
 	mainmenu();
 });
+
+ 
+ $(document).ready(function() { 
+	    $('#go').click(function() { 
+	        $.blockUI({
+	        	message: $('#menssage'), 
+	       	       
+	        css: { 
+	            border: 'none', 
+	            padding: '10px', 
+	            backgroundColor: '#000', 
+	            '-webkit-border-radius': '10px', 
+	            '-moz-border-radius': '10px', 
+	            opacity: .8, 
+	            color: '#fff' }
+	         }); 
+	      
+	    }); 
+	});
+ 
+ $(document).ready(function() { 
+	    $('#tab1').click(function() { 
+	        $.blockUI({
+	        	message: $('#menssage'), 
+	       	       
+	        css: { 
+	            border: 'none', 
+	            padding: '10px', 
+	            backgroundColor: '#000', 
+	            '-webkit-border-radius': '10px', 
+	            '-moz-border-radius': '10px', 
+	            opacity: .8, 
+	            color: '#fff' }
+	         }); 
+	      
+	    }); 
+	});
+
+ $(document).ready(function() { 
+	    $('#tab2').click(function() { 
+	        $.blockUI({
+	        	message: $('#menssage'), 
+	       	       
+	        css: { 
+	            border: 'none', 
+	            padding: '10px', 
+	            backgroundColor: '#000', 
+	            '-webkit-border-radius': '10px', 
+	            '-moz-border-radius': '10px', 
+	            opacity: .8, 
+	            color: '#fff' }
+	         }); 
+	      
+	    }); 
+	});
