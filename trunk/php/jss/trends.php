@@ -11,6 +11,16 @@
 <script language="JavaScript" src="media/javascript/jquery.lavalamp.min.js" type="text/javascript"></script>
 <script language="JavaScript" src="media/javascript/jquery.blockUI.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="media/css/estilos.css">
+<script type="text/javascript">
+  var uvOptions = {};
+  (function() {
+    var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
+    uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/m5AFqBSLPJi05pRDrjhgow.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
+  })();
+</script>
+
+
 <?php
 
 $conexion = mysql_connect("localhost", "root", "");
@@ -240,8 +250,9 @@ function semanaISO($fecha){
 			</div>
 		</div>
 			<div id="footer">
-				<div id="options">
-					This is the footer of the web page
+			<a href="http://www2.it.lut.fi/">
+			<div id="textfooter">Department of Information Technology</div></a>
+			<div id="logo_foot"><img src="media/img/lutLogo_en.png"></div>
 			</div>
 		</div>
 	</div>

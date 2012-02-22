@@ -34,6 +34,15 @@ $(document).ajaxStop($.unblockUI);
 	});
 </script>
 
+<script type="text/javascript">
+  var uvOptions = {};
+  (function() {
+    var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
+    uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/m5AFqBSLPJi05pRDrjhgow.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
+  })();
+</script>
+
 </head>
 
 <body>
@@ -61,9 +70,10 @@ $(document).ajaxStop($.unblockUI);
 			</div>
 		</div>
 		
-			<div id="footer">
-				<div id=options>
-					This is the footer of the web page
+		<div id="footer">
+			<a href="http://www2.it.lut.fi/">
+			<div id="textfooter">Department of Information Technology</div></a>
+			<div id="logo_foot"><img src="media/img/lutLogo_en.png"></div>
 			</div>
 		</div>
 	</div>
