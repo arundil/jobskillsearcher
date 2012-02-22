@@ -63,6 +63,15 @@ $(document).ajaxStop($.unblockUI);
 	
 </script>
 
+<script type="text/javascript">
+  var uvOptions = {};
+  (function() {
+    var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
+    uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/m5AFqBSLPJi05pRDrjhgow.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
+  })();
+</script>
+
 <title>JobSkillSearcher</title>
 </head>
 <body>
@@ -85,7 +94,14 @@ $(document).ajaxStop($.unblockUI);
 			</div>
 		</form>
 	</div>
+	<div id="footer">
+			<a href="http://www2.it.lut.fi/">
+			<div id="textfooter">Department of Information Technology</div></a>
+			<div id="logo_foot"><img src="media/img/lutLogo_en.png"></div>
+			</div>
+		</div>
 	</div>
+	
 	<div id= "menssage" style="display: none;" >
 		<h2><img src="media/img/101-5.gif" /> Searching...<h2>
 	</div>

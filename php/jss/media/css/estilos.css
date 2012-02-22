@@ -47,8 +47,7 @@ body{
     background-color: white;
     height: 500px;
     padding: 10px;
-    margin-bottom: 50px;
-}
+    }
 
 #img_error{
 	margin-left: 40px;
@@ -107,9 +106,20 @@ body{
 }
 
 #footer{
-	background-color: white;
-	border-top: solid;
+	background-color: black;
+	margin-bottom: 10px;
 	padding: 10px;
+	
+}
+
+#logo_foot{
+	text-align: right;
+}
+
+#textfooter{
+	float: right;
+	font-size: x-small;
+	color: white;
 }
 
 
