@@ -124,22 +124,52 @@ $row = mysql_fetch_assoc($resconsulta);
 $wordid = $row['id'];
 
 if (!$flagerror && $col>0){
-	$querydim = "SELECT jid FROM words LEFT JOIN wlist ON words.id=wid WHERE word LIKE '$search' GROUP BY jid; ";
+	
+	$querySynonymes = "SELECT * FROM synonymes WHERE word_ID=".$row['id'].";";
+	$resQuerySynonymes =  mysql_query($querySynonymes, $conexion) or die(mysql_error());
+	$rowQuerySynonymes = mysql_num_rows($resQuerySynonymes);
+	
+	$rowSym = mysql_fetch_assoc($resQuerySynonymes);
+	
 	$cadena="";
 	
-	$resquerydim= mysql_query($querydim, $conexion) or die(mysql_error());
-	$rowquerydim = mysql_num_rows($resquerydim);
-	
-	while ($row2 = mysql_fetch_assoc($resquerydim)){
-		$jid = $row2['jid'];
-		if ($cadena == "")
-			$cadena=$cadena . "jid=$jid";
-		else
-			$cadena=$cadena ." OR jid=$jid" ;
+	if ($rowSym['word_group_ID']!=""){
+		$querySynonymes2= "SELECT * FROM synonymes WHERE word_group_ID=".$rowSym['word_group_ID'].";";
+		$resQuerySynonymes2 =  mysql_query($querySynonymes2, $conexion) or die(mysql_error());
+		$rowQuerySynonymes2 = mysql_num_rows($resQuerySynonymes2);
+		
+		while($rowSym2 = mysql_fetch_assoc($resQuerySynonymes2)){
+			
+			$querydim = "SELECT jid FROM words LEFT JOIN wlist ON words.id=wid WHERE words.id=".$rowSym2['word_ID']." GROUP BY jid; ";
+		
+			$resquerydim= mysql_query($querydim, $conexion) or die(mysql_error());
+			$rowquerydim = mysql_num_rows($resquerydim);
+			
+			while ($row2 = mysql_fetch_assoc($resquerydim)){
+				$jid = $row2['jid'];
+				if ($cadena == "")
+					$cadena=$cadena . "jid=$jid";
+				else
+					$cadena=$cadena ." OR jid=$jid" ;
+			}
+		}
+	}else{
+		
+		$querydim = "SELECT jid FROM words LEFT JOIN wlist ON words.id=wid WHERE word LIKE '$search' GROUP BY jid; ";
+		
+		$resquerydim= mysql_query($querydim, $conexion) or die(mysql_error());
+		$rowquerydim = mysql_num_rows($resquerydim);
+		
+		while ($row2 = mysql_fetch_assoc($resquerydim)){
+			$jid = $row2['jid'];
+			if ($cadena == "")
+				$cadena=$cadena . "jid=$jid";
+			else
+				$cadena=$cadena ." OR jid=$jid" ;
+		}
 	}
 	
-	
-	$queEmp = "SELECT word, type, count(word) as lkm FROM wlist LEFT JOIN words ON wlist.wid=words.id 
+	$queEmp = "SELECT word, type, baseword, count(word) as lkm FROM wlist LEFT JOIN words ON wlist.wid=words.id 
 		WHERE ($cadena) AND type!=3 AND type!=0 AND type!=701 GROUP BY word ORDER BY lkm DESC, word;";
 	
 	
