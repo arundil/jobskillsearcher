@@ -109,3 +109,21 @@ $(" #nav li").hover(function(){
 	      
 	    }); 
 	});
+ 
+ $(document).ready(function() { 
+	    $('.wait > a').click(function() { 
+	        $.blockUI({
+	        	message: $('#menssage'), 
+	       	       
+	        css: { 
+	            border: 'none', 
+	            padding: '10px', 
+	            backgroundColor: '#000', 
+	            '-webkit-border-radius': '10px', 
+	            '-moz-border-radius': '10px', 
+	            opacity: .8, 
+	            color: '#fff' }
+	         }); 
+	      
+	    }); 
+	});

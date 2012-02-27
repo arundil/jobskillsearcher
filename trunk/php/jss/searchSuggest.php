@@ -1,4 +1,5 @@
 <?php
+
 /*
 	This is the back-end PHP file for the AJAX Suggest Tutorial
 	
@@ -34,7 +35,7 @@ if (isset($_GET['q']) && $_GET['q'] != '') {
 	$col = mysql_num_rows($resconsulta);
 	if ($col>0){
 	while ($row = mysql_fetch_assoc($resconsulta)){
-		echo utf8_decode($row['suggest'])."\n";
+		echo mb_strtolower($row['suggest'],'utf-8')."\n";
 		}
 	}
     /* $suggest_query = db_query("SELECT word as suggest, count as popularity FROM words WHERE word like('" .

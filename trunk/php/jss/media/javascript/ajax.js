@@ -39,9 +39,14 @@ function searchSuggest() {
 }
 
 //Called when the AJAX response is returned.
+
+
 function handleSearchSuggest() {
+var ss = document.getElementById('search_suggest')
+	if (ss== null){
+		ss = document.getElementById('search_suggest2')
+	}
 	if (searchReq.readyState == 4) {
-		var ss = document.getElementById('search_suggest')
 		ss.style.display="";
 		ss.innerHTML = '';
 		var str = searchReq.responseText.split("\n");
@@ -56,7 +61,7 @@ function handleSearchSuggest() {
 		}
 	}
 	if (ss.childElementCount==0)
-		document.getElementById('search_suggest').style.display="none";
+		ss.style.display="none";
 }
 
 //Mouse over function
@@ -70,9 +75,13 @@ function suggestOut(div_value) {
 }
 //Click function
 function setSearch(value) {
+	var ss = document.getElementById('search_suggest')
+	if (ss== null){
+		ss = document.getElementById('search_suggest2')
+	}
 	document.getElementById('txtSearch').value = value;
-	document.getElementById('search_suggest').innerHTML = '';
-	document.getElementById('search_suggest').style.display="none";
+	ss.innerHTML = '';
+	ss.style.display="none";
 }
 
 

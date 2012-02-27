@@ -120,7 +120,7 @@ function drawChartTrends(word,time) {
 		var options = {
 				width: 1000, height: 500,
 				title: "Trends of '"+word+"'",
-				vAxis: {title: 'Nº Advertisments',  titleTextStyle: {color: 'orange'}},
+				vAxis: {title: 'Amount of Advertisements',  titleTextStyle: {color: 'orange'}},
 				legend: 'none',
 		};
 	}
@@ -128,7 +128,7 @@ function drawChartTrends(word,time) {
 		var options = {
 				width: 1000, height: 500,
 				title: "Trends of '"+word+"'",
-				vAxis: {title: 'Nº Advertisments',  titleTextStyle: {color: 'orange'}},
+				vAxis: {title: 'Amount of Advertisements',  titleTextStyle: {color: 'orange'}},
 		};
 	}
 

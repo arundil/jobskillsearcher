@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <link type="image/x-icon" href="media/img/logoweb.png" rel="shortcut icon">
 <link rel="stylesheet" type="text/css" href="media/css/estilos.css">
 <script language="JavaScript" src="media/javascript/ajax.js" type="text/javascript"></script>
@@ -85,7 +85,7 @@ $(document).ajaxStop($.unblockUI);
 
 	<div id="maincontent">
 		
-		<form action="results.php" method="GET">
+		<form action="results.php" accept-charset="utf-8" method="GET">
 			<div id="mainsearch">
 				<label for="txtSearch" style="font-size: 20px">Search!</label> 
 				<input type="text" name='q' id="txtSearch" autocomplete="off" onkeyup="searchSuggest();" alt="Search Criteria" style="width: 500px; height: 30px; font-size: 20px">
@@ -94,11 +94,12 @@ $(document).ajaxStop($.unblockUI);
 			</div>
 		</form>
 	</div>
-	<div id="footer">
+		<div id="footer">
+			<div id="contact"><a href="/jss/contact.html" target="_blank" onClick="window.open(this.href, this.target, 'width=300,height=400'); return false;">About the Idea & the Website</a></div>
 			<a href="http://www2.it.lut.fi/">
 			<div id="textfooter">Department of Information Technology</div></a>
 			<div id="logo_foot"><img src="media/img/lutLogo_en.png"></div>
-			</div>
+		</div>
 		</div>
 	</div>
 	

@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
 <title>--JobSkillSearcher--</title>
 <link type="image/x-icon" href="media/img/logoweb.png" rel="shortcut icon"/>
 <link media="screen" rel="stylesheet" type="text/css" href="media/css/estilos.css">
@@ -76,6 +76,7 @@ function sendData(_page,capa) {
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
   })();
 </script>
+
 </head>
 
 <body>
@@ -85,19 +86,16 @@ function sendData(_page,capa) {
 				<a href="/jss"> <img src="media/img/title_beta.png"> </a>
 			</div>
 			<div id=searcher>
-				<form action="" method="GET">
-					<label for="s1">Search!</label> <input type="text" name="q" id="txtSearch" autocomplete="on" onkeyup="" on alt="Search Criteria">
+				<form action="" accept-charset="utf-8" method="GET">
+					<label for="txtSearch">Search!</label> <input type="text" name="q" id="txtSearch" autocomplete="off" onkeyup="searchSuggest();" alt="Search Criteria" >
 					<button id="go"type="submit">GO!</button>
-					<div id="search_suggest" style="display:none" ></div>
+					<div id="search_suggest2" style="display:none" ></div>
 				</form>
 			</div>
 			<div class="nofloat"></div>
 		</div>						
 <?php
 
-header('Content-Type: text/html; charset=iso-8859-1');
-//$timestart = explode (' ', microtime());
-//$noofwords = 0;
 $error = "";
 $flagerror = false;
 $search = $_GET['q'];
@@ -105,7 +103,6 @@ $cuenta=0;
 
 $conexion = mysql_connect("localhost", "root", "");
 mysql_select_db("JSSdb3", $conexion); 
-
 $consulta = "SELECT * FROM words WHERE (word='$search');";
 $resconsulta = mysql_query($consulta,$conexion) or die(mysql_error());
 $col = mysql_num_rows($resconsulta);
@@ -113,15 +110,17 @@ $col = mysql_num_rows($resconsulta);
 if (!$col>0){
 	
 	if ($search == "")
-		header('Location:error404.php');
+		echo "<script language=\"javascript\">window.location=\"error404.php\"</script>;";
 	else
-		header('Location: error404.php');
+		echo "<script language=\"javascript\">window.location=\"error404.php\"</script>;";
 	
 	$flagerror = true;
 }
 
 $row = mysql_fetch_assoc($resconsulta);
 $wordid = $row['id'];
+$word = $row['word'];
+$nwords= $row['count'];
 
 if (!$flagerror && $col>0){
 	
@@ -139,6 +138,10 @@ if (!$flagerror && $col>0){
 		$rowQuerySynonymes2 = mysql_num_rows($resQuerySynonymes2);
 		
 		while($rowSym2 = mysql_fetch_assoc($resQuerySynonymes2)){
+			$idSynbase=0;
+			if ($rowSym2['baseword']==1){
+				$idSynbase=$rowSym2['word_ID'];
+			}
 			
 			$querydim = "SELECT jid FROM words LEFT JOIN wlist ON words.id=wid WHERE words.id=".$rowSym2['word_ID']." GROUP BY jid; ";
 		
@@ -153,6 +156,15 @@ if (!$flagerror && $col>0){
 					$cadena=$cadena ." OR jid=$jid" ;
 			}
 		}
+		if ($idSynbase!=0){
+			$querySynonymes3= "SELECT * FROM words WHERE id=".$idSynbase.";";
+			$resQuerySynonymes3 =  mysql_query($querySynonymes3, $conexion) or die(mysql_error());
+			$rowQuerySynonymes3 = mysql_num_rows($resQuerySynonymes3);
+			$rowSym3 = mysql_fetch_assoc($resQuerySynonymes3);
+			$word= $rowSym3['word'];
+			$nwords= $rowSym3['count'];
+		}
+		
 	}else{
 		
 		$querydim = "SELECT jid FROM words LEFT JOIN wlist ON words.id=wid WHERE word LIKE '$search' GROUP BY jid; ";
@@ -169,7 +181,7 @@ if (!$flagerror && $col>0){
 		}
 	}
 	
-	$queEmp = "SELECT word, type, baseword, count(word) as lkm FROM wlist LEFT JOIN words ON wlist.wid=words.id 
+	$queEmp = "SELECT word, type, bid, count(word) as lkm FROM wlist LEFT JOIN words ON wlist.wid=words.id 
 		WHERE ($cadena) AND type!=3 AND type!=0 AND type!=701 GROUP BY word ORDER BY lkm DESC, word;";
 	
 	
@@ -281,7 +293,7 @@ if ($totEmp> 0) {
 				<?php
 				
 				 if (!$error)
-				 	echo "<div id='number'>This word appears in ".$row['count']. " advertisements</div><div id='word'>".utf8_decode($row['word'])." </div>"; 
+				 	echo "<div id='number'>This word appears in ".$nwords. " advertisements</div><div id='word'>".utf8_decode($word)." </div>"; 
 				 else
 				 	echo "<h2>No results found :</h2>" 
 				 
@@ -293,13 +305,13 @@ if ($totEmp> 0) {
 		<div id="tabs">
 			<ul>
 				<li>
-					<?php echo "<a href= 'results.php?q=".$search."' id='tab1'><span>Look word results<span/></a>";?>
+					<?php echo "<a href= 'results.php?q=".$word."' id='tab1'><span>Look word results<span/></a>";?>
 					
 					</a>
 				</li>
 				<li>
 					<a title="Link 2" href="#">
-					<?php echo "<a href= 'trends.php?q=".$search."' id='tab2'><span>Look word trend<span/></a>";?>
+					<?php echo "<a href= 'trends.php?q=".$word."' id='tab2'><span>Look word trend<span/></a>";?>
 					</a>
 				</li>
 			</ul>
@@ -315,7 +327,7 @@ if ($totEmp> 0) {
 					for ($i=0; $i<count($keys1); $i ++){
 						$cad = substr($keys1[$i],2,3);
 						$elem = $listcodes[intval($cad)];	
-						echo "<li><a href=\"#\" onclick=\"show('".utf8_decode($elem)."');\">".utf8_decode($elem)."</a></li>";
+						echo "<li><a href=\"#\" onclick=\"show('".$elem ."');\">".$elem."</a></li>";
 					}
 					?>
           
@@ -378,7 +390,7 @@ if ($totEmp> 0) {
 					$str1=substr($line[$j],0,$pos);
 					$str2= substr($line[$j],$pos+1,strlen($line[$j]));
 					
-					echo "<div ><a href=\"?q=".$str1."\">".utf8_decode($str1)."</a> ".$str2."</br></div>";
+					echo "<div class='wait' ><a href=\"?q=".$str1."\">".utf8_decode($str1)."</a> ".$str2."</br></div>";
 				}
 				echo "</div>";
 			}
@@ -392,7 +404,7 @@ if ($totEmp> 0) {
 					$str1=substr($line[$j],0,$pos);
 					$str2= substr($line[$j],$pos+1,strlen($line[$j]));
 					
-					echo "<div ><a href=\"?q=".$str1."\">".utf8_decode($str1)."</a> ".$str2."</br></div>";
+					echo "<div class='wait'><a href=\"?q=".$str1."\">".utf8_decode($str1)."</a> ".$str2."</br></div>";
 				}
 				echo "</br></div>";
 			}
@@ -406,7 +418,7 @@ if ($totEmp> 0) {
 					$str1=substr($line[$j],0,$pos);
 					$str2= substr($line[$j],$pos+1,strlen($line[$j]));
 					
-					echo "<div ><a href=\"?q=".$str1."\">".utf8_decode($str1)."</a> ".$str2."</br></div>";
+					echo "<div class='wait'><a href=\"?q=".$str1."\">".utf8_decode($str1)."</a> ".$str2."</br></div>";
 				}
 				echo "</br></div>";
 			}
@@ -420,7 +432,7 @@ if ($totEmp> 0) {
 					$str1=substr($line[$j],0,$pos);
 					$str2= substr($line[$j],$pos+1,strlen($line[$j]));
 					
-					echo "<div ><a href=\"?q=".$str1."\">".utf8_decode($str1)."</a> ".$str2."</br></div>";
+					echo "<div class='wait'><a href=\"?q=".$str1."\">".utf8_decode($str1)."</a> ".$str2."</br></div>";
 				}
 				echo "</br></div>";
 			}
@@ -432,10 +444,11 @@ if ($totEmp> 0) {
 		</div>  
 		
 		<div id="footer">
+			<div id="contact"><a href="./contact.html" target="_blank" onClick="window.open(this.href, this.target, 'width=300,height=400'); return false;">About the Idea & the Website</a></div>
 			<a href="http://www2.it.lut.fi/">
 			<div id="textfooter">Department of Information Technology</div></a>
 			<div id="logo_foot"><img src="media/img/lutLogo_en.png"></div>
-			</div>
+		</div>
 		</div>
 	</div>
 	
@@ -444,6 +457,7 @@ if ($totEmp> 0) {
 	<div id= "menssage" style="display: none;" >
 		<h2><img src="media/img/101-5.gif" /> Searching...<h2>
 	</div>
+
 </body>
 
 </html>
