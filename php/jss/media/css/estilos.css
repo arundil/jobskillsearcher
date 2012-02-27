@@ -4,6 +4,10 @@
 	border-style: solid;
 }  */          
 
+img{
+border:none;
+}
+
 body{
 	/*background-color: #E6E6E6;*/
 	background-image: url("../img/bgweb.png");
@@ -60,8 +64,10 @@ body{
 }
 
 #mainsearch {
+	color: orange;
     margin-top: 200px;
     text-align: center;
+    font-weight: bold;
 }
 
 #logo{
@@ -111,6 +117,13 @@ body{
 	padding: 10px;
 	
 }
+#contact a{
+	float: left;
+	color: white;
+	font-size: x-small;
+	text-decoration: none;
+}
+
 
 #logo_foot{
 	text-align: right;
@@ -325,7 +338,7 @@ a:LINK {
 		padding: 2px 6px 2px 6px;
 	}
 	.suggest_link_over {
-		background-color: #3366CC;
+		background-color: black;/*#  3366CC*/
 		padding: 2px 6px 2px 6px;
 	}
 	#search_suggest {
@@ -335,4 +348,15 @@ a:LINK {
 		background-color: #FFFFFF; 
 		text-align: left; 
 		border: 1px solid #000000;			
-	}		
+	}	
+	
+#search_suggest2 {
+		font-size:small;
+		position: absolute; 
+		margin-left: 72px;
+		width: 202px;
+		background-color: #FFFFFF; 
+		text-align: left; 
+		border: 1px solid #000000;	
+		z-index: 20;		
+}	
